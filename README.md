@@ -1,122 +1,57 @@
-<div align = "center">
+<div align="center">
 
-# Twilight
+# Fish の Blog
 
-A CMS integrated static blog template built with Astro framework.
+**菜鸟的日常记录博客**
 
-[**🖥️ Live Demo**](https://twilight.spr-aachen.com)
-[**📝 Documentation**](https://docs.twilight.spr-aachen.com/en)
-
-[![Bilibili](https://img.shields.io/badge/Bilibili-Intro-blue?logo=Bilibili)](https://space.bilibili.com/359461611/lists/6641229)&nbsp;
-[![YouTube](https://img.shields.io/badge/YouTube-Intro-red?logo=YouTube)](https://youtube.com/playlist?list=PLzjq8Hx1SRV7yqZQiACcCJmKPeg5D8JKe&si=Bcz2o0PF8MFvx8ec)
-
-<table style="width: 100%; table-layout: fixed;">
-   <tr>
-      <td colspan="5"><img alt="Desktop" src="docs/image/Desktop.jpg" style="max-width: 100%;"></td>
-   </tr>
-   <tr>
-      <td><img alt="Mobile_4" src="docs/image/Mobile_4.jpg" style="max-width: 100%;"></td>
-      <td><img alt="Mobile_2" src="docs/image/Mobile_2.jpg" style="max-width: 100%;"></td>
-      <td><img alt="Mobile_1" src="docs/image/Mobile_1.jpg" style="max-width: 100%;"></td>
-      <td><img alt="Mobile_3" src="docs/image/Mobile_3.jpg" style="max-width: 100%;"></td>
-      <td><img alt="Mobile_5" src="docs/image/Mobile_5.jpg" style="max-width: 100%;"></td>
-   </tr>
-</table>
+[**🌐 访问博客**](https://zenfish-zy.github.io/blog/)
 
 </div>
 
 ---
 
-<div align = "center">
+## 关于
 
-English | [**中文**](docs/README_ZH.md)
+这是 Zenfish 的个人博客，用于记录学习笔记、技术探索和日常随想。
+
+博客基于 [Twilight](https://github.com/Spr-Aachen/Twilight) 主题构建，使用 Astro 静态站点生成器。
+
+## 本地开发
+
+```bash
+# 安装依赖
+pnpm install
+
+# 启动开发服务器
+pnpm dev
+
+# 构建生产版本
+pnpm build
+```
+
+## 部署
+
+运行 `deploy.bat` 一键推送到 GitHub Pages。
+
+## 目录结构
+
+```
+├── public/              # 静态资源（图片、音乐等）
+├── src/content/         # 博客内容
+│   └── posts/           # 文章 Markdown 文件
+├── twilight.config.yaml # 站点配置
+└── deploy.bat           # 部署脚本
+```
+
+## 致谢
+
+- 博客主题：[Twilight](https://github.com/Spr-Aachen/Twilight) by [Spr-Aachen](https://github.com/Spr-Aachen)
+- 框架：[Astro](https://astro.build/)
+
+---
+
+<div align="center">
+
+**Powered by [Twilight](https://docs.twilight.spr-aachen.com/)**
 
 </div>
-
-
-## ✨ Features
-
-### Content
-- **CMS Functionality**: Easy content management with Decap CMS integration
-- **Data Visualization**: Visualized personal data like projects, skills etc.
-- **Automatic Navigation**: Automatic generation of post navigation
-
-### Components
-- **Analytics Support**: Umami analytics integration for visitor insights
-- **Comment System**: Twikoo-powered comment functionality
-- **Music Player**: Background music support with playlist management
-- **PIO Widget**: Interactive live2d character support
-
-### VFX
-- **Smooth Transition Animations**: Polished page component transition animations
-- **Customizable Theme Colors**: Realtime customizable color schemes
-- **Dynamic Wallpaper System**: Carousel support with multiple display modes
-- **Immersive Particle Effects**: Highly customizable animated particles
-
-### Compability
-- **Modern & Responsive Design**: Fully optimized for desktop and mobile devices
-- **Multilingual Capability**: Built-in translation functionality for global accessibility
-
-
-## 📦 Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/Spr-Aachen/Twilight.git
-   cd Twilight
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   # Install pnpm if not already installed
-   npm install -g pnpm
-   
-   # Install project dependencies
-   pnpm install
-   ```
-
-3. **Configure your blog:**
-   - [Customize blog settings](https://docs.twilight.spr-aachen.com/en/config/core) inside `twilight.config.yaml`
-   - [Support CMS functionality](https://docs.twilight.spr-aachen.com/en/config/cms) inside `.env`
-   - [Support Umami analytics](https://docs.twilight.spr-aachen.com/en/config/analytics) inside `.env`
-   - [Manage site content](https://docs.twilight.spr-aachen.com/en/config/content) inside `src/content`
-
-4. **Start the development server:**
-   ```bash
-   pnpm dev
-   ```
-
-
-## 🚀 Deployment
-
-Deploy your blog to any static hosting platform
-
-
-## ⚡ Commands
-
-| Command                     | Action                      |
-|:----------------------------|:----------------------------|
-| `pnpm lint`                 | Check and fix code issues   |
-| `pnpm format`               | Format code with Biome      |
-| `pnpm check`                | Run Astro error checking    |
-| `pnpm dev`                  | Start local dev server      |
-| `pnpm build`                | Build site to `./dist/`     |
-| `pnpm preview`              | Preview build locally       |
-| `pnpm astro ...`            | Run Astro CLI commands      |
-| `pnpm new-post <filename>`  | Create a new blog post      |
-
-
-## 🙏 Acknowledgements
-
-- Prototype   - [Fuwari](https://github.com/saicaca/fuwari)
-- Inspiration - [Yukina](https://github.com/WhitePaper233/yukina) & [Mizuki](https://github.com/matsuzaka-yuki/Mizuki)
-- CMS         - [astro-decap-cms-oauth](https://github.com/dorukgezici/astro-decap-cms-oauth)
-- Translation - [translate](https://gitee.com/mail_osc/translate)
-
-
-## 🤝 Support
-
-This project is supported by Alibaba Cloud ESA for accelerated delivery, compute, and protection.
-<a href="https://esa.console.aliyun.com/">
-   <img src="https://img.alicdn.com/imgextra/i3/O1CN01H1UU3i1Cti9lYtFrs_!!6000000000139-2-tps-7534-844.png" alt="Alibaba Cloud ESA Support" style="max-width: 100%; height: auto;">
-</a>

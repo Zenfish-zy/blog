@@ -20,7 +20,7 @@ export const BANNER_HEIGHT_HOME = BANNER_HEIGHT + BANNER_HEIGHT_EXTEND;
 export const MAIN_PANEL_OVERLAPS_BANNER_HEIGHT = 0;
 
 // Page width (rem)
-export const PAGE_WIDTH = 90;
+export const PAGE_WIDTH = 100;
 
 // Category constants
 export const UNCATEGORIZED = "uncategorized";
