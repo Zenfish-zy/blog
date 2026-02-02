@@ -151,7 +151,7 @@ site:
 # Umami统计配置
 umami:
     # 是否显示Umami统计
-    enabled: false
+    enabled: true
     # UmamiCloudAPI地址
     baseUrl: "https://api.umami.is"
     # API密钥 (可用环境变量覆盖)
@@ -384,13 +384,13 @@ musicPlayer:
                 # 序号
                 id: 1
                 # 标题
-                title: "知我"
+                title: "知我 (伴奏版)"
                 # 作者
-                artist: "哦漏"
+                artist: "国风堂"
                 # 封面
                 cover: ""
                 # 路径
-                url: "/blog/assets/music/zhiwo.mp3"
+                url: "/blog/assets/music/zhiwo-instrumental.flac"
                 # 时长
                 duration: 228
     # 是否自动播放
