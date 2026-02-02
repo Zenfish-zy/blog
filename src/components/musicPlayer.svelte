@@ -68,6 +68,8 @@ let lastSaveTime = 0;
 let errorMessage = $state("");
 // 是否显示错误信息
 let showError = $state(false);
+// 页面隐藏前是否正在播放（用于切换标签页/最小化时暂停）
+let wasPlayingBeforeHidden = false;
 
 // 存储键名常量
 const STORAGE_KEYS = {
