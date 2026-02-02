@@ -81,6 +81,26 @@ const STORAGE_KEYS = {
     LAST_SONG_PROGRESS: "player_last_song_progress",
 };
 
+// 页面可见性变化处理（切换标签页/最小化窗口时暂停音乐）
+function handleVisibilityChange() {
+    if (typeof document === 'undefined' || !audio) return;
+
+    if (document.hidden) {
+        // 页面隐藏时：记录当前播放状态，然后暂停
+        wasPlayingBeforeHidden = isPlaying;
+        if (isPlaying) {
+            audio.pause();
+        }
+    } else {
+        // 页面显示时：如果之前在播放，则恢复播放
+        if (wasPlayingBeforeHidden && !isPlaying) {
+            audio.play().catch(() => {
+                // 自动播放可能被浏览器阻止，忽略错误
+            });
+        }
+    }
+}
+
 function restoreLastSong() {
     if (playlist.length === 0) return;
 
@@ -516,6 +536,8 @@ onMount(() => {
     audio = new Audio();
     audio.volume = volume;
     handleAudioEvents();
+    // 监听页面可见性变化（切换标签页/最小化时暂停）
+    document.addEventListener('visibilitychange', handleVisibilityChange);
     interactionEvents.forEach(event => {
         document.addEventListener(event, handleUserInteraction, { capture: true });
     });
@@ -542,6 +564,7 @@ onDestroy(() => {
         interactionEvents.forEach(event => {
             document.removeEventListener(event, handleUserInteraction, { capture: true });
         });
+        document.removeEventListener('visibilitychange', handleVisibilityChange);
     }
     if (audio) {
         audio.pause();
