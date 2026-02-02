@@ -1,18 +1,22 @@
-# About This Site
+# 关于
 
-Twilight is a CMS integrated static blog template built with [Astro](https://astro.build) framework.
+Hey，你好呀！欢迎来到我的小站～
 
-::github{repo="Spr-Aachen/Twilight"}
+## 关于我
 
+我是一个刚入门的小白博主，正在努力学习各种技术知识。
 
-## Milestones
+这个博客是我记录学习历程的地方，虽然现在内容还很少，但我会慢慢充实它的！
 
-- Integrated content management system in [#1](https://github.com/Spr-Aachen/Twilight/pull/1)
-- Seamless wallpaper mode switching in [#2](https://github.com/Spr-Aachen/Twilight/pull/2)
-- Dynamic content container response in [#47](https://github.com/Spr-Aachen/Twilight/pull/47)
-- Seamless page component loading in [#48](https://github.com/Spr-Aachen/Twilight/pull/48)
-- Smart music playback handling in [#49](https://github.com/Spr-Aachen/Twilight/pull/49)
-- Infinite-level navigation system in [#50](https://github.com/Spr-Aachen/Twilight/pull/50)
-- Comprehensive statistics dashboard in [#51](https://github.com/Spr-Aachen/Twilight/pull/51)
-- Low-barrier configuration scheme in [#58](https://github.com/Spr-Aachen/Twilight/pull/58)
-- Dynamic breakpoint handling in [#68](https://github.com/Spr-Aachen/Twilight/pull/68)
+## 关于本站
+
+- 框架：[Astro](https://astro.build/)
+- 主题：[Twilight](https://github.com/Spr-Aachen/Twilight)
+
+## 联系我
+
+如果你有任何问题或者想法，欢迎与我交流！
+
+---
+
+> 学习的路上，我们一起加油！

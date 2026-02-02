@@ -1,18 +1,29 @@
 ---
 
-## How to Apply
+## 友链申请
 
-Please send your website information to: xxx@xxx.com
+欢迎互换友链！请通过以下方式联系我：
 
-Email Subject:
+**邮件主题：**
 ```
-Request to Add Friend
+友链申请
 ```
 
-Email Content (Template):
+**邮件内容（模板）：**
 ```
-Site Name: [Your Site Name]
-Site Desc: [Your Site Description]
-Site Link: [Your Site Link]
-Avatar Link: [Your Avatar Link]
+站点名称: [你的站点名称]
+站点描述: [你的站点描述]
+站点链接: [你的站点链接]
+头像链接: [你的头像链接]
+```
+
+---
+
+## 本站信息
+
+```
+站点名称: Fishのblog
+站点描述: 菜鸟的日常记录博客
+站点链接: https://zenfish-zy.github.io/blog/
+头像链接: https://zenfish-zy.github.io/blog/assets/images/avatar.png
 ```
