@@ -53,10 +53,12 @@ site:
         src:
             # 桌面壁纸图片 (相对于 /public 目录; 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播)
             desktop:
-                - "/assets/images/cute-dogs-camping.png"
+                - "/assets/images/cute-dogs-camping1.png"
+                - "/assets/images/cute-dogs-camping2.png"
             # 移动壁纸图片 (相对于 /public 目录; 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播)
             mobile:
-                - "/assets/images/cute-dogs-camping.png"
+                - "/assets/images/cute-dogs-camping1.png"
+                - "/assets/images/cute-dogs-camping2.png"
         # 壁纸位置 ('top' | 'center' | 'bottom')
         position: "center"
         # 轮播配置 (fullscreen 和 banner 模式共享)
