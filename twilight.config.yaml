@@ -148,7 +148,7 @@ site:
 # Umami统计配置
 umami:
     # 是否显示Umami统计
-    enabled: true
+    enabled: false
     # UmamiCloudAPI地址
     baseUrl: "https://api.umami.is"
     # API密钥 (可用环境变量覆盖)
@@ -268,7 +268,7 @@ announcement:
     # 公告内容
     content: "欢迎来到 Fishのblog！"
     # 允许用户关闭公告
-    closable: true
+    closable: false
     # 链接配置
     link:
         # 启用链接
@@ -370,7 +370,7 @@ musicPlayer:
         # 音乐平台
         server: "netease"
         # 类型 ("playlist" 歌单 | "song" 单曲)
-        type: "playlist"
+        type: "song"
         # 资源 ID
         id: "2161912966"
     # local 模式专属配置
@@ -396,7 +396,7 @@ musicPlayer:
 # 看板娘配置
 pio:
     # 启用看板娘
-    enable: false
+    enable: true
     # 模型文件路径
     models:
         - "/pio/models/pio/model.json"
