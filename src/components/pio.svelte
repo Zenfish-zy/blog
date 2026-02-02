@@ -3,13 +3,21 @@ import { onMount, onDestroy } from "svelte";
 
 import { pioConfig } from "@/config";
 
+// 处理模型路径，添加 BASE_URL
+const processModelPaths = (models: string[] | undefined): string[] => {
+    const defaultModels = [`${import.meta.env.BASE_URL}pio/models/pio/model.json`];
+    if (!models || models.length === 0) return defaultModels;
+    return models.map(path =>
+        path.startsWith('/') ? `${import.meta.env.BASE_URL}${path.slice(1)}` : path
+    );
+};
 
 // 将配置转换为 Pio 插件需要的格式
 const pioOptions = {
     mode: pioConfig.mode,
     hidden: pioConfig.hiddenOnMobile,
     content: pioConfig.dialog || {},
-    model: pioConfig.models || ["/pio/models/pio/model.json"],
+    model: processModelPaths(pioConfig.models),
 };
 
 // 全局Pio实例引用
@@ -66,8 +74,8 @@ function loadPioAssets() {
     };
 
     // 按顺序加载脚本
-    loadScript("/pio/static/l2d.js", "pio-l2d-script")
-        .then(() => loadScript("/pio/static/pio.js", "pio-main-script"))
+    loadScript(`${import.meta.env.BASE_URL}pio/static/l2d.js`, "pio-l2d-script")
+        .then(() => loadScript(`${import.meta.env.BASE_URL}pio/static/pio.js`, "pio-main-script"))
         .then(() => {
             // 脚本加载完成后初始化
             setTimeout(initPio, 100);

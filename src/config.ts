@@ -91,7 +91,7 @@ export const siteConfig: SiteConfig = config.site;
 
 // Umami统计配置
 export const umamiConfig = {
-    enabled: true,
+    enabled: false,
     apiKey: import.meta.env.UMAMI_API_KEY ?? config.umami.apiKey,
     baseUrl: "https://api.umami.is",
     scripts: import.meta.env.UMAMI_TRACKING_CODE ?? config.umami.scripts,

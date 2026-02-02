@@ -213,7 +213,7 @@ const umamiScripts = umamiConfig.scripts || ""; // 获取Umami scripts配置
         <!-- custom head -->
         <slot name="head"></slot>
         <!-- Pio 看板娘样式 - 仅在启用时加载 -->
-        {pioConfig.enable && <link rel="stylesheet" href="/pio/static/pio.css" />}
+        {pioConfig.enable && <link rel="stylesheet" href={`${import.meta.env.BASE_URL}pio/static/pio.css`} />}
         <!-- rss feed -->
         <link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
         <!-- Umami Analytics -->

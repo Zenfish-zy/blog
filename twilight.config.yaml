@@ -33,12 +33,12 @@ site:
     timeZone: 8
     # 字体配置
     font:
-        # 示例字体配置 - Zen Maru Gothic
-        "Example - ZenMaruGothic":
-            # 字体源 (字体 CSS 链接 | 字体文件路径)
-            src: "https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap"
+        # 霞鹜文楷 - 开源中文楷体，完整覆盖简繁中文+日文
+        "LXGW-WenKai":
+            # 字体源 (Google Fonts 镜像)
+            src: "https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css"
             # 字体名 (font-family)
-            family: "Zen Maru Gothic"
+            family: "LXGW WenKai"
     # 主题色配置
     themeColor:
         # 主题色的默认色相 (范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345)
@@ -396,7 +396,7 @@ musicPlayer:
 # 看板娘配置
 pio:
     # 启用看板娘
-    enable: true
+    enable: false
     # 模型文件路径
     models:
         - "/pio/models/pio/model.json"

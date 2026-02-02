@@ -4,6 +4,7 @@ export interface Props {
     speed?: number;
     deleteSpeed?: number;
     pauseTime?: number;
+    jinrishici?: boolean;
     class?: string;
 }
 
@@ -12,12 +13,13 @@ const {
     speed = 100,
     deleteSpeed = 50,
     pauseTime = 2000,
+    jinrishici = false,
     class: className = "",
 } = Astro.props;
 const textData = Array.isArray(text) ? JSON.stringify(text) : text;
 ---
 
-<span class={`typewriter ${className}`} data-text={textData} data-speed={speed} data-delete-speed={deleteSpeed} data-pause-time={pauseTime}></span>
+<span class={`typewriter ${className}`} data-text={textData} data-speed={speed} data-delete-speed={deleteSpeed} data-pause-time={pauseTime} data-jinrishici={jinrishici ? "true" : undefined}></span>
 
 <script>
 class TypewriterEffect {
@@ -47,6 +49,28 @@ class TypewriterEffect {
         this.deleteSpeed = parseInt(element.dataset.deleteSpeed || '50');
         this.pauseTime = parseInt(element.dataset.pauseTime || '2000');
 
+        // 如果启用了今日诗词，先异步获取再开始
+        if (element.dataset.jinrishici === 'true') {
+            this.loadJinrishici().then(() => this.beginTyping());
+        } else {
+            this.beginTyping();
+        }
+    }
+
+    private async loadJinrishici() {
+        try {
+            const res = await fetch('https://v2.jinrishici.com/one.json');
+            const data = await res.json();
+            if (data.status === 'success' && data.data?.content) {
+                // 将诗句添加到文本列表开头
+                this.texts.unshift(data.data.content);
+            }
+        } catch {
+            // 获取失败不影响原有功能
+        }
+    }
+
+    private beginTyping() {
         // 如果有多条文本且未启用打字机效果，随机显示一条
         if (this.texts.length > 1 && !this.isTypewriterEnabled()) {
             this.showRandomText();
