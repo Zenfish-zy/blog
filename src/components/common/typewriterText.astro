@@ -139,21 +139,28 @@ class TypewriterEffect {
     }
 }
 
-// 初始化所有打字机效果
-document.addEventListener('DOMContentLoaded', () => {
+// 初始化函数
+function initTypewriters() {
     const typewriterElements = document.querySelectorAll('.typewriter');
     typewriterElements.forEach((element) => {
-        new TypewriterEffect(element as HTMLElement);
+        // 避免重复初始化
+        if (!element.hasAttribute('data-initialized')) {
+            element.setAttribute('data-initialized', 'true');
+            new TypewriterEffect(element as HTMLElement);
+        }
     });
-});
+}
 
-// 支持页面切换时重新初始化
-document.addEventListener('swup:contentReplaced', () => {
-    const typewriterElements = document.querySelectorAll('.typewriter');
-    typewriterElements.forEach((element) => {
-        new TypewriterEffect(element as HTMLElement);
-    });
-});
+// 监听 Astro 页面切换事件（用于 View Transitions / Swup）
+document.addEventListener('astro:after-swap', initTypewriters);
+
+// 初始页面加载
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTypewriters);
+} else {
+    // DOM 已经加载完成，直接初始化
+    initTypewriters();
+}
 </script>
 
 <style>
