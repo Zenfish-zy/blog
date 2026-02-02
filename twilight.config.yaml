@@ -390,11 +390,11 @@ musicPlayer:
                 # 封面
                 cover: ""
                 # 路径
-                url: "/assets/music/哦漏 - 知我.mp3"
+                url: "/blog/assets/music/zhiwo.mp3"
                 # 时长
-                duration: 0
+                duration: 228
     # 是否自动播放
-    autoplay: false
+    autoplay: true
 
 # 看板娘配置
 pio:
