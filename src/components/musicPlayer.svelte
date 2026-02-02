@@ -51,7 +51,7 @@ let currentTime = $state(0);
 // 歌曲总时长
 let duration = $state(0);
 // 音量
-let volume = $state(0.05);
+let volume = $state(0.03);
 // 是否静音
 let isMuted = $state(false);
 // 是否正在加载

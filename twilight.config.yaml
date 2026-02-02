@@ -53,13 +53,10 @@ site:
         src:
             # 桌面壁纸图片 (相对于 /public 目录; 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播)
             desktop:
-                - "/assets/images/desktopWallpaper_1.jpg"
-                - "/assets/images/desktopWallpaper_2.jpg"
-                - "/assets/images/desktopWallpaper_3.jpg"
+                - "/assets/images/cute-dogs-camping.png"
             # 移动壁纸图片 (相对于 /public 目录; 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播)
             mobile:
-                - "/assets/images/mobileWallpaper_1.jpg"
-                - "/assets/images/mobileWallpaper_2.jpg"
+                - "/assets/images/cute-dogs-camping.png"
         # 壁纸位置 ('top' | 'center' | 'bottom')
         position: "center"
         # 轮播配置 (fullscreen 和 banner 模式共享)
@@ -249,7 +246,7 @@ sidebar:
 # 资料配置
 profile:
     # 头像配置 (相对于 /public 目录)
-    avatar: "/assets/images/avatar.png"
+    avatar: "/assets/images/Zenfish.png"
     # 信息配置
     name: "Zenfish"
     # 简介配置
@@ -279,7 +276,7 @@ announcement:
         # 链接文本
         text: "Learn More"
         # 链接 URL
-        url: "/about/"
+        url: "/blog/about/"
         # 是否外部链接
         external: false
 
