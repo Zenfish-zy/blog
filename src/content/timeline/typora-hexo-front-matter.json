@@ -1,0 +1,29 @@
+{
+    "title": "Typora Hexo Front Matter 插件",
+    "description": "为 Typora 编辑器开发的插件，用于快速插入 Hexo 博客所需的 YAML Front Matter 模板。基于 obgnail/typora_plugin 进行 Vibe Coding 开发。",
+    "type": "project",
+    "startDate": "2026-01-27",
+    "endDate": "2026-01-27",
+    "skills": [
+        "JavaScript",
+        "Typora Plugin API",
+        "TOML"
+    ],
+    "achievements": [
+        "实现右键菜单快速插入功能",
+        "支持自动填充当前日期时间",
+        "防止重复插入保护机制",
+        "自动光标定位到标题字段",
+        "保持文件原有格式(BOM、换行符)"
+    ],
+    "links": [
+        {
+            "name": "使用说明文章",
+            "url": "/posts/typora-hexo-front-matter-plugin",
+            "type": "other"
+        }
+    ],
+    "icon": "material-symbols:extension",
+    "color": "#4A90D9",
+    "featured": true
+}

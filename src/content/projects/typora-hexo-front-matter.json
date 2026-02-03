@@ -1,0 +1,23 @@
+{
+    "title": "Typora Hexo Front Matter 插件",
+    "description": "为 Typora 编辑器开发的插件，用于快速插入 Hexo 博客所需的 YAML Front Matter 模板。支持右键菜单快速插入、自动填充日期、防止重复插入、自动光标定位等功能。",
+    "image": "",
+    "category": "library",
+    "techStack": [
+        "JavaScript",
+        "Typora Plugin API",
+        "TOML"
+    ],
+    "status": "completed",
+    "liveDemo": "",
+    "sourceCode": "",
+    "startDate": "2026-01-27",
+    "endDate": "2026-01-27",
+    "featured": true,
+    "tags": [
+        "Typora",
+        "插件",
+        "Vibe Coding",
+        "开源项目"
+    ]
+}
