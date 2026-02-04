@@ -2,8 +2,7 @@
 title: LOSP (Learnable Orthogonal Subspace Projection)
 published: 2026-02-04 11:14
 tags: []
-category:
-  - 炼丹日记
+category: 炼丹日记
 description: 基于正交子空间投影的高光消除方法，用于低光目标检测。
 ---
 
