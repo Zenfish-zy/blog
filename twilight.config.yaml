@@ -323,7 +323,7 @@ particle:
     # 启用粒子特效
     enable: true
     # 粒子数量
-    particleNum: 12
+    particleNum: 30
     # 粒子越界限制次数，-1为无限循环
     limitTimes: -1
     # 粒子尺寸配置
