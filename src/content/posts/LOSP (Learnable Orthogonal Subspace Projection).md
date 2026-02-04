@@ -2,28 +2,31 @@
 title: LOSP (Learnable Orthogonal Subspace Projection)
 published: 2026-02-04 11:14
 tags: []
-category: 
+category:
   - 炼丹日记
 description: 基于正交子空间投影的高光消除方法，用于低光目标检测。
+---
 
-核心思想：
+## 核心思想
+
 1. 高光是加法项: I = R⊙L + S，传统log方法无法分离
 2. 假设高光向量S在RGB空间具有低秩特性（方向相对固定）
 3. 学习投影基W，使得 W·S ≈ 0，物理消除高光
 4. 投影后的特征可继续使用YOLA的Log-Ratio逻辑
 
-模块组成：
+## 模块组成
+
 - LOSPProjection: 可学习正交投影层（核心创新）
 - DualInvariantExtractor: 双流特征提取（光谱+空间不变量）
 - AdaptiveFusion: 自适应融合
 - SoftTailLoss: 可微的长尾抑制损失
 - OrthogonalityLoss: 正交多样性约束
 
-数学基础：
+## 数学基础
+
 - 投影: proj_W(I) = W·I，其中W是单位正交基
 - 光谱不变量: log(C_i) - log(C_j) 消除乘法光照
 - 空间不变量: ∇(log(C)) 保留单通道纹理
----
 
 
 ---
