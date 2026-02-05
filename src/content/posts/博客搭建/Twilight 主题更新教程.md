@@ -49,9 +49,11 @@ cp -r ~/blog/Twilight ~/blog/Twilight-backup
 | CMS 配置 | `public/admin/config.yml` | 作者提到 ✓ |
 | 站点配置 | `twilight.config.yaml` | 作者提到 ✓ |
 | 自定义脚注 | `public/FooterConfig.html` | 作者提到 ✓ |
-| **GitHub Actions** | `.github/workflows/` | ⚠️ **作者未提到，容易遗漏！** |
+| **GitHub Actions** | `.github/workflows/` | ⚠️ **作者未提到，必须保留！** |
+| **构建配置** | `astro.config.mjs` | ⚠️ **含 base 路径，子目录部署必须！** |
 | **部署脚本** | `deploy.bat`, `backup.bat` | ⚠️ **作者未提到** |
 | **修改备忘录** | `CUSTOM_CHANGES.md` | ⚠️ **作者未提到** |
+| **仓库说明** | `README.md` | ⚠️ **作者未提到，容易被覆盖！** |
 
 ## 更新流程
 
@@ -116,13 +118,21 @@ Copy-Item -Path "E:\Tools\blog\Twilight-backup\public\admin\config.yml" -Destina
 # 恢复 GitHub Actions 工作流（非常重要！）
 Copy-Item -Path "E:\Tools\blog\Twilight-backup\.github" -Destination "E:\Tools\blog\Twilight\" -Recurse -Force
 
+# 恢复 astro.config.mjs（含 base 路径配置，子目录部署必须！）
+Copy-Item -Path "E:\Tools\blog\Twilight-backup\astro.config.mjs" -Destination "E:\Tools\blog\Twilight\" -Force
+
 # 恢复部署和备份脚本
 Copy-Item -Path "E:\Tools\blog\Twilight-backup\deploy.bat" -Destination "E:\Tools\blog\Twilight\" -Force
 Copy-Item -Path "E:\Tools\blog\Twilight-backup\backup.bat" -Destination "E:\Tools\blog\Twilight\" -Force
 
 # 恢复自定义修改备忘录
 Copy-Item -Path "E:\Tools\blog\Twilight-backup\CUSTOM_CHANGES.md" -Destination "E:\Tools\blog\Twilight\" -Force
+
+# 恢复 README
+Copy-Item -Path "E:\Tools\blog\Twilight-backup\README.md" -Destination "E:\Tools\blog\Twilight\" -Force
 ```
+
+> ⚠️ **特别注意 `astro.config.mjs`**：如果直接恢复旧文件，新版的配置变更（如新增插件）会丢失。更好的做法是**对比新旧 `astro.config.mjs`**，只将 `base: "/blog/"` 等个人配置改回来，保留新版其他配置。
 
 > 💡 如果忘记备份 `.github/workflows/deploy.yml`，可以从 git 历史恢复：
 > ```bash
@@ -251,6 +261,35 @@ pnpm dev
 
 **解决**：修改 deploy.bat，只保留 `git add` → `git commit` → `git push` 三步，构建交给云端。
 
+### 问题 6：base 路径导致网站卡死 loading 🔥🔥🔥
+
+**现象**：部署后网站一直停在 loading 页面，无法进入。
+
+**原因**：博客部署在 `zenfish-zy.github.io/blog/`（子目录），但新主题默认 `base: "/"`。所有 JS/CSS 资源路径指向 `/_astro/xxx.js`（根目录），而实际应该指向 `/blog/_astro/xxx.js`，导致全部资源 404。只有 HTML 能加载，所以 loading 页面显示了但 JS 永远不会执行。
+
+**解决**：在 `astro.config.mjs` 中设置 `base: "/blog/"`。
+
+> ⚠️ **这不是可选的美化配置，而是子目录部署的必要条件！** 如果仓库名不是 `<username>.github.io`，GitHub Pages 会在 `/<repo-name>/` 子目录下提供服务，必须设置 `base` 匹配。
+
+### 问题 7：README.md 被覆盖
+
+**现象**：GitHub 仓库的 README 变成了主题作者的介绍。
+
+**原因**：新主题自带 README.md，覆盖了个人 README。
+
+**解决**：从 git 历史恢复：
+```bash
+git show HEAD~1:README.md > README.md
+```
+
+### 问题 8：旧版相册配置残留
+
+**现象**：构建时报错 `Image file not found: src/content/albums/智子_ASK.jpg`。
+
+**原因**：备份恢复时，旧版的 `src/content/albums/example.json` 和新版的 `src/content/albums/example/jsonExample.json` 共存了。新版相册结构变成了子文件夹形式，旧版配置引用的路径已失效。
+
+**解决**：删除旧版 `src/content/albums/example.json`，保留新版 `example/` 子文件夹。
+
 ## 验证与调试
 
 ### 1. 安装依赖
@@ -308,15 +347,20 @@ ls .github/workflows/
 | 项目 | 作者指引 | 实际需要 |
 |:---|:---|:---|
 | `.github/workflows/` | 未提及 | ⚠️ **必须保留**，否则部署失败 |
+| `astro.config.mjs` 的 `base` | 未提及 | ⚠️ **子目录部署必须设置**，否则资源全部 404 |
 | `deploy.bat` / `backup.bat` | 未提及 | 需要保留或重建 |
 | `CUSTOM_CHANGES.md` | 未提及 | 强烈建议保留 |
+| `README.md` | 未提及 | ⚠️ 容易被新主题覆盖，需要恢复 |
 | 代码块语言大小写 | 未提及 | 需要全部小写 |
+| 旧版 albums 配置 | 未提及 | ⚠️ 需要删除，新版使用子文件夹结构 |
 
 ### 建议
 
 1. 每次做源码修改时，及时更新 `CUSTOM_CHANGES.md`
-2. `backup.bat` 脚本应该备份所有重要文件（包括脚本自身）
+2. `backup.bat` 脚本应该备份所有重要文件（包括脚本自身和 README）
 3. 更新前先检查 `.github/workflows/` 是否存在
+4. **子目录部署务必检查 `base` 配置**，这是最容易导致网站无法访问的问题
+5. 恢复备份后，建议对比新旧 `astro.config.mjs`，只保留个人配置（如 `base`），其他保持新版
 
 ---
 

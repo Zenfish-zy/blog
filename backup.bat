@@ -56,9 +56,15 @@ if exist "%SOURCE%\CUSTOM_CHANGES.md" (
 echo.
 
 :: Backup scripts (deploy.bat and backup.bat)
-echo [6/6] Backing up scripts...
+echo [6/7] Backing up scripts...
 copy /Y "%SOURCE%\deploy.bat" "%BACKUP%\deploy.bat" >nul
 copy /Y "%SOURCE%\backup.bat" "%BACKUP%\backup.bat" >nul
+echo       Done!
+echo.
+
+:: Backup README.md
+echo [7/7] Backing up README.md...
+copy /Y "%SOURCE%\README.md" "%BACKUP%\README.md" >nul
 echo       Done!
 echo.
 
@@ -77,6 +83,7 @@ echo     - astro.config.mjs     (build config)
 echo     - CUSTOM_CHANGES.md    (manual changes memo)
 echo     - deploy.bat           (deploy script)
 echo     - backup.bat           (this script)
+echo     - README.md            (repo readme)
 echo.
 echo   Remember: After upgrading Twilight template,
 echo   check CUSTOM_CHANGES.md for source code mods!
