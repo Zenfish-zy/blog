@@ -1,83 +1,68 @@
 @echo off
+chcp 65001 >nul
 title Twilight Blog Deploy
 
 echo ========================================
-echo   Fish Blog - Twilight Deploy Script
+echo   Twilight Blog - Deploy Script
 echo ========================================
 echo.
 
-:: Check if git is initialized
-if not exist ".git" (
-    echo [1/5] Initializing Git repository...
-    git init
-    git branch -M main
-    echo.
-) else (
-    echo [1/5] Git repository exists, skipping...
-    echo.
-)
+:: Set path
+set "PROJECT=E:\Tools\blog\Twilight"
+cd /d "%PROJECT%"
 
-:: Check if remote is configured
-git remote get-url origin >nul 2>&1
-if errorlevel 1 (
-    echo [2/5] Adding remote repository...
+:: Step 1: Build
+echo [1/4] Building project...
+call pnpm build
+if %errorlevel% neq 0 (
     echo.
-    echo ==========================================
-    echo  Please create a "blog" repo on GitHub first!
-    echo  1. Open https://github.com/new
-    echo  2. Repository name: blog
-    echo  3. Select Public
-    echo  4. Do NOT check any initialize options
-    echo  5. Click Create repository
-    echo ==========================================
+    echo [ERROR] Build failed! Please fix the errors above.
     echo.
     pause
-    git remote add origin https://github.com/Zenfish-zy/blog.git
+    exit /b 1
+)
+echo       Build succeeded!
+echo.
+
+:: Step 2: Stage all changes
+echo [2/4] Staging changes...
+git add -A
+echo       Done!
+echo.
+
+:: Step 3: Commit with custom message
+echo [3/4] Committing...
+set /p "COMMIT_MSG=Enter commit message (press Enter for 'update blog'): "
+if "%COMMIT_MSG%"=="" set "COMMIT_MSG=update blog"
+git commit -m "%COMMIT_MSG%"
+if %errorlevel% neq 0 (
     echo.
-) else (
-    echo [2/5] Remote configured, skipping...
+    echo [INFO] Nothing to commit, working tree clean.
     echo.
 )
-
-:: Add all files
-echo [3/5] Adding files to staging area...
-git add .
 echo.
 
-:: Commit
-echo [4/5] Committing changes...
-set /p commit_msg="Enter commit message (press Enter for default): "
-if "%commit_msg%"=="" set commit_msg=update blog
-git commit -m "%commit_msg%"
-echo.
-
-:: Push
-echo [5/5] Pushing to GitHub...
-git push -u origin main
-echo.
-
-if errorlevel 1 (
-    echo ========================================
-    echo  Push failed! Possible reasons:
-    echo    1. GitHub repo not created yet
-    echo    2. Git credentials not configured
+:: Step 4: Push to remote
+echo [4/4] Pushing to GitHub...
+git push origin main
+if %errorlevel% neq 0 (
     echo.
-    echo  First time? Run:
-    echo    git config --global user.name "your-name"
-    echo    git config --global user.email "your-email"
-    echo ========================================
-) else (
-    echo ========================================
-    echo  Push successful!
+    echo [ERROR] Push failed! Please check your network or credentials.
     echo.
-    echo  Next steps:
-    echo    1. Open https://github.com/Zenfish-zy/blog
-    echo    2. Go to Settings - Pages
-    echo    3. Source: select "GitHub Actions"
-    echo    4. Wait a few minutes, then visit:
-    echo       https://zenfish-zy.github.io/blog/
-    echo ========================================
+    pause
+    exit /b 1
 )
+echo.
 
+echo ========================================
+echo   Deploy completed!
+echo ========================================
+echo.
+echo   Remote: https://github.com/Zenfish-zy/blog
+echo   Site:   https://zenfish-zy.github.io/blog/
+echo.
+echo   Please wait a few minutes for GitHub
+echo   Pages to rebuild your site.
+echo ========================================
 echo.
 pause

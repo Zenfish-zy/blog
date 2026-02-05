@@ -221,13 +221,13 @@ ssh -p 30022 jqr@114.66.xxx.184
 
 创建服务文件：
 
-```Bash
+```bash
 sudo vim /etc/systemd/system/frpc_zy.service
 ```
 
 写入：
 
-```TOML
+```toml
 [Unit]
 Description=FRP Client Service
 After=network.target
@@ -246,7 +246,7 @@ WantedBy=multi-user.target
 
 运行：
 
-```Bash
+```bash
 sudo systemctl daemon-reload
 sudo systemctl enable frpc_zy
 sudo systemctl start frpc_zy

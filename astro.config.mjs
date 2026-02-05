@@ -38,12 +38,12 @@ const adapter = process.env.CF_PAGES ? cloudflarePages() : vercel({ mode: "serve
 
 export default defineConfig({
     site: siteConfig.siteURL,
-    base: "/blog/",
+    base: "/",
     trailingSlash: "always",
     adapter: adapter,
     integrations: [
         decapCmsOauth({
-            decapCMSVersion: "3.3.3",
+            decapCMSVersion: "3.9.0",
             oauthDisabled: true, // Disable it to use oauth, requires .env configuration
         }),
         swup({
@@ -134,7 +134,6 @@ export default defineConfig({
         sitemap(),
     ],
     markdown: {
-        smartypants: false,
         remarkPlugins: [
             remarkMath,
             remarkReadingTime,

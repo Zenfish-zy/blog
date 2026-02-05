@@ -18,7 +18,7 @@ description: "基于 FRP 的跨局域网多设备 SSH 互通系统搭建，通�
 
 云服务器作为统一转发入口，最终形成：
 
-```Plain
+```text
 Windows A ←→ 云服务器（FRPS） ←→ Linux C
 ```
 
@@ -28,7 +28,7 @@ Windows A ←→ 云服务器（FRPS） ←→ Linux C
 
 ## 2.1 下载并解压 FRP
 
-```Bash
+```bash
 cd ~
 wget https://github.com/fatedier/frp/releases/download/v0.60.0/frp_0.60.0_linux_amd64.tar.gz
 tar -zxvf frp_0.60.0_linux_amd64.tar.gz
@@ -39,13 +39,13 @@ cd frp_0.60.0_linux_amd64
 
 编辑配置文件：
 
-```Bash
+```bash
 nano frps.toml
 ```
 
 内容如下（可直接使用）：
 
-```TOML
+```toml
 bindAddr = "0.0.0.0"
 bindPort = 7000
 
@@ -71,13 +71,13 @@ tlsEnable = true
 
 ## 2.3 前台启动 FRPS（测试）
 
-```Bash
+```bash
 ./frps -c ./frps.toml
 ```
 
 看到类似：
 
-```Plain
+```text
 frps started successfully, listen on 0.0.0.0:7000
 ```
 
@@ -110,14 +110,14 @@ Windows A 中：
 
 安装完成后：
 
-```PowerShell
+```powershell
 Start-Service sshd
 Set-Service sshd -StartupType Automatic
 ```
 
 本机测试：
 
-```PowerShell
+```powershell
 ssh <你的用户名>@localhost
 ```
 
@@ -125,13 +125,13 @@ ssh <你的用户名>@localhost
 
 下载 Windows 版：
 
-```Plain
+```text
 frp_0.60.0_windows_amd64.zip
 ```
 
 解压到：
 
-```Plain
+```text
 D:\software_install\Frpc\frp_0.60.0_windows_amd64
 ```
 
@@ -139,13 +139,13 @@ D:\software_install\Frpc\frp_0.60.0_windows_amd64
 
 创建文件：
 
-```Plain
+```text
 frpc_win_A.toml
 ```
 
 内容：
 
-```TOML
+```toml
 serverAddr = "101.42.100.164"
 serverPort = 7000
 loginFailExit = false
@@ -164,14 +164,14 @@ remotePort = 6001
 
 ## 4.4 启动 FRPC
 
-```PowerShell
+```powershell
 cd D:\software_install\Frpc\frp_0.60.0_windows_amd64
 .\frpc.exe -c .\frpc_win_A.toml
 ```
 
 成功后日志会显示：
 
-```Plain
+```text
 start proxy win_A_ssh success
 ```
 
@@ -179,7 +179,7 @@ start proxy win_A_ssh success
 
 ## 5.1 启动 SSH 服务
 
-```Bash
+```bash
 sudo apt install openssh-server     # 或 yum install openssh-server
 sudo systemctl enable ssh
 sudo systemctl start ssh
@@ -187,7 +187,7 @@ sudo systemctl start ssh
 
 本机测试：
 
-```Bash
+```bash
 ssh $(whoami)@localhost
 ```
 
@@ -195,19 +195,19 @@ ssh $(whoami)@localhost
 
 进入解压目录，例如：
 
-```Bash
+```bash
 cd ~/frp_0.60.0_linux_amd64
 ```
 
 创建：
 
-```Bash
+```bash
 nano frpc_linux_C.toml
 ```
 
 写入：
 
-```TOML
+```toml
 serverAddr = "101.42.100.164"
 serverPort = 7000
 loginFailExit = false
@@ -226,14 +226,14 @@ remotePort = 6003
 
 ## 5.3 启动 FRPC
 
-```Bash
+```bash
 cd ~/frp_0.60.0_linux_amd64
 ./frpc -c ./frpc_linux_C.toml
 ```
 
 成功后输出：
 
-```Plain
+```text
 start proxy linux_C_ssh success
 ```
 
@@ -241,13 +241,13 @@ start proxy linux_C_ssh success
 
 ### 从 Windows A 登录 Linux C：
 
-```PowerShell
+```powershell
 ssh <linuxC用户名>@101.42.100.164 -p 6003
 ```
 
 ### 从 Linux C 登录 Windows A：
 
-```Bash
+```bash
 ssh <windowsA用户名>@101.42.100.164 -p 6001
 ```
 
@@ -257,13 +257,13 @@ ssh <windowsA用户名>@101.42.100.164 -p 6001
 
 创建服务文件：
 
-```Bash
+```bash
 sudo nano /etc/systemd/system/frps.service
 ```
 
 写入：
 
-```TOML
+```toml
 [Unit]
 Description=FRP Server Service
 After=network.target
@@ -282,7 +282,7 @@ WantedBy=multi-user.target
 
 运行：
 
-```Bash
+```bash
 sudo systemctl daemon-reload
 sudo systemctl enable frps
 sudo systemctl start frps
@@ -293,13 +293,13 @@ sudo systemctl status frps
 
 在 Windows A 上：
 
-```PowerShell
+```powershell
 Test-NetConnection 101.42.100.164 -Port 7000
 ```
 
 显示：
 
-```Plain
+```text
 TcpTestSucceeded : True
 ```
 
@@ -307,7 +307,7 @@ TcpTestSucceeded : True
 
 在云服务器上测试 SSH 是否转发成功：
 
-```Bash
+```bash
 journalctl -u frps -f
 ```
 

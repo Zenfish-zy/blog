@@ -19,13 +19,13 @@ description: PyTorch 历史版本安装命令及 CUDA 版本对应关系速查
 
 一般我最常用的是 （ python 3.10 + ） 【pytorch 2.1.2】 + 【pip 安装】 + 【Linux】 + 【CUDA 11.8】 ，命令为：
 
-```Bash
+```bash
 pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 --index-url https://download.pytorch.org/whl/cu118
 ```
 
 我们做 计算机视觉，一般使用不到 `torchaudio` （处理语音、音频），所以可以不安装，删除掉之后，命令为：
 
-```Bash
+```bash
 pip install torch==2.1.2 torchvision==0.16.2 --index-url https://download.pytorch.org/whl/cu118
 ```
 
@@ -33,7 +33,7 @@ pip install torch==2.1.2 torchvision==0.16.2 --index-url https://download.pytorc
 
 推荐使用 ： （ python 3.12 + ） 【pytorch 2.7.0】 + 【pip 安装】 + 【Linux】 + 【CUDA 12.8】
 
-```Bash
+```bash
 pip install torch==2.7.0 torchvision==0.22.0 --index-url https://download.pytorch.org/whl/cu128
 ```
 

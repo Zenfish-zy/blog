@@ -15,7 +15,7 @@ description: Ubuntu 系统下 NVIDIA 显卡驱动安装、CUDA Toolkit 配置及
 
 选择cuda12.1，手动下载，之后执行
 
-```Bash
+```bash
 chmod +x cuda_12.1.0_530.30.02_linux.run
 sudo ./cuda_12.1.0_530.30.02_linux.run --installpath=/mnt/xxg/RoboTwin/cuda/cuda-12.1
 ```
@@ -32,19 +32,19 @@ export LD_LIBRARY_PATH=/mnt/xxg/RoboTwin/cuda/cuda-12.1/lib64:$LD_LIBRARY_PATH
 
 ### 1.1、安装nvidia-cuda-toolkit 工具
 
-```COBOL
+```bash
 sudo apt-get install nvidia-cuda-toolkit
 ```
 
 ### 1.2、检查系统推荐显卡驱动，记录下recommend选项
 
-```COBOL
+```bash
 sudo ubuntu-drivers devices
 ```
 
 结果显示如下：
 
-```COBOL
+```bash
 == /sys/devices/pci0000:00/0000:00:01.0/0000:01:00.0 ==
 modalias : pci:v000010DEd000028E0sv0000103Csd00008BABbc03sc00i00
 vendor   : NVIDIA Corporation
@@ -60,7 +60,7 @@ driver   : xserver-xorg-video-nouveau - distro free builtin
 
 ### 1.3、添加驱动源
 
-```COBOL
+```bash
 sudo add-apt-repository ppa:graphics-drivers/ppa
 sudo apt-get update
 ```
@@ -73,13 +73,13 @@ sudo apt-get update
 
 ### 1.5、重启电脑
 
-```COBOL
+```bash
 reboot
 ```
 
 1.6、查看驱动版本
 
-```COBOL
+```bash
 nvidia-smi
 ```
 
@@ -138,14 +138,14 @@ nvidia-smi
 
 ![img](./1763368628274-2.png)
 
-```COBOL
+```bash
 wget
 https://developer.download.nvidia.com/compute/cuda/11.4.4/local_installers/cuda_11.4.4_470.82.01_linux.run
 ```
 
 ## 安装
 
-```COBOL
+```bash
 sudo sh cuda_11.4.4_470.82.01_linux.run
 ```
 

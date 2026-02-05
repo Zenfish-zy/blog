@@ -28,7 +28,7 @@ let currentSong: MusicPlayerTrack = $state({
     id: 0,
     title: "Music",
     artist: "Artist",
-    cover: `${import.meta.env.BASE_URL}favicon/icon-light.ico`,
+    cover: "/favicon/icon-light.ico",
     url: "",
     duration: 0,
 });
@@ -51,7 +51,7 @@ let currentTime = $state(0);
 // 歌曲总时长
 let duration = $state(0);
 // 音量
-let volume = $state(0.03);
+let volume = $state(0.75);
 // 是否静音
 let isMuted = $state(false);
 // 是否正在加载
@@ -68,8 +68,8 @@ let lastSaveTime = 0;
 let errorMessage = $state("");
 // 是否显示错误信息
 let showError = $state(false);
-// 页面隐藏前是否正在播放（用于切换标签页/最小化时暂停）
-let wasPlayingBeforeHidden = false;
+// 页面隐藏前是否正在播放（用于恢复播放状态）
+let wasPlayingBeforeHidden = $state(false);
 
 // 存储键名常量
 const STORAGE_KEYS = {
@@ -81,22 +81,19 @@ const STORAGE_KEYS = {
     LAST_SONG_PROGRESS: "player_last_song_progress",
 };
 
-// 页面可见性变化处理（切换标签页/最小化窗口时暂停音乐）
+// 处理页面可见性变化，隐藏时暂停，显示时恢复
 function handleVisibilityChange() {
-    if (typeof document === 'undefined' || !audio) return;
-
     if (document.hidden) {
-        // 页面隐藏时：记录当前播放状态，然后暂停
-        wasPlayingBeforeHidden = isPlaying;
+        // 页面隐藏时，记录当前播放状态并暂停
         if (isPlaying) {
-            audio.pause();
+            wasPlayingBeforeHidden = true;
+            audio?.pause();
         }
     } else {
-        // 页面显示时：如果之前在播放，则恢复播放
-        if (wasPlayingBeforeHidden && !isPlaying) {
-            audio.play().catch(() => {
-                // 自动播放可能被浏览器阻止，忽略错误
-            });
+        // 页面显示时，如果之前在播放则恢复
+        if (wasPlayingBeforeHidden) {
+            wasPlayingBeforeHidden = false;
+            audio?.play().catch(() => {});
         }
     }
 }
@@ -536,8 +533,8 @@ onMount(() => {
     audio = new Audio();
     audio.volume = volume;
     handleAudioEvents();
-    // 监听页面可见性变化（切换标签页/最小化时暂停）
-    document.addEventListener('visibilitychange', handleVisibilityChange);
+    // 监听页面可见性变化，实现切换标签页时暂停
+    document.addEventListener("visibilitychange", handleVisibilityChange);
     interactionEvents.forEach(event => {
         document.addEventListener(event, handleUserInteraction, { capture: true });
     });
@@ -564,7 +561,8 @@ onDestroy(() => {
         interactionEvents.forEach(event => {
             document.removeEventListener(event, handleUserInteraction, { capture: true });
         });
-        document.removeEventListener('visibilitychange', handleVisibilityChange);
+        // 移除页面可见性监听器
+        document.removeEventListener("visibilitychange", handleVisibilityChange);
     }
     if (audio) {
         audio.pause();

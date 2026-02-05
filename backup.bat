@@ -20,32 +20,49 @@ if not exist "%BACKUP%" (
 )
 
 :: Backup public folder
-echo [1/4] Backing up public folder...
+echo [1/6] Backing up public folder...
 if exist "%BACKUP%\public" rmdir /s /q "%BACKUP%\public"
 xcopy /E /I /Y /Q "%SOURCE%\public" "%BACKUP%\public" >nul
 echo       Done!
 echo.
 
 :: Backup src/content folder
-echo [2/4] Backing up src/content folder...
+echo [2/6] Backing up src/content folder...
 if exist "%BACKUP%\src\content" rmdir /s /q "%BACKUP%\src\content"
 xcopy /E /I /Y /Q "%SOURCE%\src\content" "%BACKUP%\src\content" >nul
 echo       Done!
 echo.
 
 :: Backup config file
-echo [3/4] Backing up twilight.config.yaml...
+echo [3/6] Backing up twilight.config.yaml...
 copy /Y "%SOURCE%\twilight.config.yaml" "%BACKUP%\twilight.config.yaml" >nul
 echo       Done!
 echo.
 
 :: Backup astro.config.mjs (contains base path)
-echo [4/4] Backing up astro.config.mjs...
+echo [4/6] Backing up astro.config.mjs...
 copy /Y "%SOURCE%\astro.config.mjs" "%BACKUP%\astro.config.mjs" >nul
 echo       Done!
 echo.
 
-:: Count files
+:: Backup CUSTOM_CHANGES.md
+echo [5/6] Backing up CUSTOM_CHANGES.md...
+if exist "%SOURCE%\CUSTOM_CHANGES.md" (
+    copy /Y "%SOURCE%\CUSTOM_CHANGES.md" "%BACKUP%\CUSTOM_CHANGES.md" >nul
+    echo       Done!
+) else (
+    echo       [SKIP] File not found.
+)
+echo.
+
+:: Backup scripts (deploy.bat and backup.bat)
+echo [6/6] Backing up scripts...
+copy /Y "%SOURCE%\deploy.bat" "%BACKUP%\deploy.bat" >nul
+copy /Y "%SOURCE%\backup.bat" "%BACKUP%\backup.bat" >nul
+echo       Done!
+echo.
+
+:: Summary
 echo ========================================
 echo   Backup completed!
 echo ========================================
@@ -53,11 +70,13 @@ echo.
 echo   Backup location: %BACKUP%
 echo.
 echo   Contents:
-echo     - public/           (static assets)
-echo     - src/content/      (posts, diary, etc.)
-echo     - twilight.config.yaml
-echo     - astro.config.mjs
-echo     - CUSTOM_CHANGES.md (manual changes memo)
+echo     - public/              (static assets)
+echo     - src/content/         (posts, diary, etc.)
+echo     - twilight.config.yaml (site config)
+echo     - astro.config.mjs     (build config)
+echo     - CUSTOM_CHANGES.md    (manual changes memo)
+echo     - deploy.bat           (deploy script)
+echo     - backup.bat           (this script)
 echo.
 echo   Remember: After upgrading Twilight template,
 echo   check CUSTOM_CHANGES.md for source code mods!
