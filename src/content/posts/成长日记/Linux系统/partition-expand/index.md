@@ -1,11 +1,14 @@
 ---
-title: Linux分区扩容
-published: 2026-02-05 09:33
+title: Linux LVM 分区扩容指南
+published: 2026-02-05
 tags:
   - Linux
+  - LVM
+  - 分区管理
 category: 成长日记
-description:  **LVM**不重装系统扩容根分区
+description: Ubuntu 系统下使用 LVM 在线扩容根分区的完整操作指南，无需重装系统
 ---
+
 ![image-20251116174624013](./image-20251116174624013.png)
 
 好消息：从你这张图来看，你的 Ubuntu 安装在 **LVM** 上，所以**完全可以不重装系统就扩容根分区 `/`**，而且操作比改分区安全得多。
@@ -80,7 +83,7 @@ $ sudo lvs
 
 > 两种写法选一种就行：
 
-**写法 A：指定“扩到多少”**
+**写法 A：指定"扩到多少"**
 
 ```
 sudo lvextend -r -L 400G /dev/ubuntu-vg/ubuntu-lv
@@ -89,7 +92,7 @@ sudo lvextend -r -L 400G /dev/ubuntu-vg/ubuntu-lv
 - `-L 400G`：把这个 LV 的总大小改成 400G
 - `-r`：resize filesystem，自动帮你扩展 ext4 文件系统
 
-**写法 B：指定“增加多少”**
+**写法 B：指定"增加多少"**
 
 如果你想在原来的 100G 基础上 **增加 300G**：
 
@@ -108,7 +111,7 @@ sudo lvextend -r -L +300G /dev/ubuntu-vg/ubuntu-lv
 sudo lvextend -r -l +100%FREE /dev/ubuntu-vg/ubuntu-lv
 ```
 
-`-l +100%FREE` 的意思是“把卷组里所有空闲都给这个 LV”。
+`-l +100%FREE` 的意思是"把卷组里所有空闲都给这个 LV"。
 
 ![image-20251117134759289](./image-20251117134759289.png)
 
