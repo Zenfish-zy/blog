@@ -173,6 +173,8 @@ description: 基于正交子空间投影的高光消除方法，用于低光目�
 
 ### LOSP-TOODv2
 
-
+并未改善
 
 ### LOSP-yolov3v2
+
+并未改善
