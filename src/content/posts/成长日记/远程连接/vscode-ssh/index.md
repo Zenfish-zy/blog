@@ -5,7 +5,7 @@ tags:
   - VSCode
   - SSH
   - 远程开发
-category: 成长日记
+category: 成长日记/远程连接
 description: Windows 使用 VSCode Remote-SSH 插件连接 Linux 服务器，配置免密登录的完整教程
 ---
 

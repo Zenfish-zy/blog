@@ -2,7 +2,7 @@
 title: "Node.js 安装与环境配置"
 published: 2026-02-05
 tags: [Node.js, 环境配置]
-category: 成长日记
+category: 成长日记/开发工具
 description: "Node.js 安装教程及环境变量配置指南"
 ---
 

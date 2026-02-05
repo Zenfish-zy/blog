@@ -2,7 +2,7 @@
 title: "PassNAT 内网穿透与 Tmux 后台运行"
 published: 2026-02-05
 tags: [PassNAT, 内网穿透, Tmux]
-category: 成长日记
+category: 成长日记/远程连接
 description: "使用 PassNAT 建立 SSH 隧道，并通过 Tmux 保持连接在后台稳定运行"
 ---
 
