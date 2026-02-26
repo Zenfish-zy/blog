@@ -141,15 +141,30 @@ $$
 
 ## 需求
 
- 针对低光检测，YOLA总结前人经验，得出适合人类视觉的低光图像增强并不适合下游检测器，反而可能导致性能的下降，于是在朗伯体漫反射先验的条件下，利用交叉色比提取图像的固有属性（intrinsic property (reflectance)），并证明了这种光照不变特征有利于下游检测器的性能提升，但是由于真实世界的图像并不完全是漫反射，还具有其他干扰，FRBNet提出YOLA模型过于理想化，并未考虑高光（The Lambertian model assumes purely diffuse reflection, where light is scattered uniformly across the surface. However, real-world low-light images (Fig. 1(b)) frequently contain complex and spatially localized light sources, including streetlights, vehicle headlights, and neon signs. These sources contradict the idealized diffuse reflection assumption underlying the Lambertian model），提出加入非均匀高光项（Motivated by the additive decomposition in the Phong illumination model [45]( A.1 for details), we introduce an extended version of the Lambertian model adapted to real-world low-light scenes by reinterpreting the localized light sources as non-uniform highlights），但是交叉色比便消除不了高光项了，于是转入了频域操作消除高光项并得到光照不变特征。我想知道是否有其他的方法消除高光项，或者就是能够即插即用，不需要制作复杂的数据集的增强下游检测器性能的模块化方法。
-此外已经做了一些尝试：
-1.对于预测高光然后消除，仅仅只用相关损失函数或者新的预测网络并不能学习到如何预测高光。本征图像分解依然是你如何保证有效的分解而不是根本学不会。
-2.对于类似DENet，FeatEnHancer等类似方法，是加了一个所谓的多尺度特征，虽然可能确实有效，但是很黑箱，给不了我什么启发
-3.没有raw文件，只有Exdark和darkface等低光目标检测数据集
-4.通过实验发现若不把光照不变特征与原始RGB特征卷积融合，只使用光照不变特征，则检测精度急剧下降，只有30左右的mAP
+针对低光检测，YOLA总结前人经验，得出适合人类视觉的低光图像增强并不适合下游检测器，反而可能导致性能的下降，于是在朗伯体漫反射先验的条件下，利用交叉色比提取图像的固有属性（intrinsic property (reflectance)），并证明了这种光照不变特征有利于下游检测器的性能提升，但是由于真实世界的图像并不完全是漫反射，还具有其他干扰，FRBNet提出YOLA模型过于理想化，并未考虑高光（The Lambertian model assumes purely diffuse reflection, where light is scattered uniformly across the surface. However, real-world low-light images (Fig. 1(b)) frequently contain complex and spatially localized light sources, including streetlights, vehicle headlights, and neon signs. These sources contradict the idealized diffuse reflection assumption underlying the Lambertian model），提出加入非均匀高光项（Motivated by the additive decomposition in the Phong illumination model, we introduce an extended version of the Lambertian model adapted to real-world low-light scenes by reinterpreting the localized light sources as non-uniform highlights），但是交叉色比便消除不了高光项了，于是转入了频域操作消除高光项并得到光照不变特征。我想知道是否有其他的能够即插即用，不需要制作复杂的数据集的方法消除高光项，或者不死磕高光项的消除，只要能够即插即用，不需要制作复杂的数据集就增强下游检测器性能的模块化方法就行。 此外已经做了一些尝试： 
+
+1.对于预测高光然后消除，仅仅只用相关损失函数或者新的预测网络并不能学习到如何预测高光。本征图像分解问题是你如何保证有效的分解而不是根本学不会。 
+
+2.对于类似DENet，FeatEnHancer等类似方法，是加了一个所谓的多尺度特征，虽然可能确实有效，但是很黑箱，给不了我什么启发 
+
+3.没有raw文件，只有Exdark和darkface等低光目标检测数据集 
+
+4.通过实验发现若不把光照不变特征与原始RGB特征卷积融合，只使用光照不变特征，则检测精度急剧下降，只有30左右的mAP 
+
 5.注意到$\begin{aligned}log(M_{rb})&=log(\rho^{R_{p_1}}(\lambda))-log(\rho^{R_{p_2}}(\lambda))\\&+log(\rho^{B_{p_2}}(\lambda))-log(\rho^{B_{p_1}}(\lambda))\end{aligned}$交叉色比得到的不是纯单通道光照不变特征，而是不同像素的不同通道的光照不变特征的和或者差
+6.![image-20260207103217198](./research-ideas/image-20260207103217198.png)
+
+yola论文这里零均值约束有错误，我默认他是$e^{R_{p_{i}}}\approx e^{B_{p_i}}$，也就是本来光谱能量的假设应该是相邻像素的同一通道是相近的，但是他又进行了白光的近似，也就是同一像素不同通道的光谱能量是差不多的
+
+请给我新的低光检测的即插即用思路
 
 
 
-请给我要么数学上能顺理成章推导（可以使用已有的合理假设或近似）理论要有现实依据（从什么地方获得启发）而不是靠猜测，最多有一个猜测点，而且还要实验证明猜测正确，要么使用该方法的理由比较合理，总之言之有理，不一定局限于物理模型先验，可以借鉴很多其他交叉领域，比如像clip（不能我提到clip你就选clip，要从逻辑分析：clip能比有监督学习学到更好的本质特征，鲁棒性和泛化性更强，是否可以巧妙引入到低光检测？）这种。即插即用的可学习模块，懂？
+
+
+
+
+
+
+
 
