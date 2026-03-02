@@ -139,32 +139,65 @@ $$
 
 
 
-## 需求
+## 思考与实践
 
 针对低光检测，YOLA总结前人经验，得出适合人类视觉的低光图像增强并不适合下游检测器，反而可能导致性能的下降，于是在朗伯体漫反射先验的条件下，利用交叉色比提取图像的固有属性（intrinsic property (reflectance)），并证明了这种光照不变特征有利于下游检测器的性能提升，但是由于真实世界的图像并不完全是漫反射，还具有其他干扰，FRBNet提出YOLA模型过于理想化，并未考虑高光（The Lambertian model assumes purely diffuse reflection, where light is scattered uniformly across the surface. However, real-world low-light images (Fig. 1(b)) frequently contain complex and spatially localized light sources, including streetlights, vehicle headlights, and neon signs. These sources contradict the idealized diffuse reflection assumption underlying the Lambertian model），提出加入非均匀高光项（Motivated by the additive decomposition in the Phong illumination model, we introduce an extended version of the Lambertian model adapted to real-world low-light scenes by reinterpreting the localized light sources as non-uniform highlights），但是交叉色比便消除不了高光项了，于是转入了频域操作消除高光项并得到光照不变特征。我想知道是否有其他的能够即插即用，不需要制作复杂的数据集的方法消除高光项，或者不死磕高光项的消除，只要能够即插即用，不需要制作复杂的数据集就增强下游检测器性能的模块化方法就行。 此外已经做了一些尝试： 
 
-1.对于预测高光然后消除，仅仅只用相关损失函数或者新的预测网络并不能学习到如何预测高光。本征图像分解问题是你如何保证有效的分解而不是根本学不会。 
+1. 对于预测高光然后消除，仅仅只用相关损失函数或者新的预测网络并不能学习到如何预测高光。本征图像分解问题是你如何保证有效的分解而不是根本学不会。 
 
-2.对于类似DENet，FeatEnHancer等类似方法，是加了一个所谓的多尺度特征，虽然可能确实有效，但是很黑箱，给不了我什么启发 
+2. 使用物理先验引导高光预测，我也不知道准不准，感觉有点草率，最终结果就是效果不如baseline，具体你可以查看代码
 
-3.没有raw文件，只有Exdark和darkface等低光目标检测数据集 
+3. 尝试过使用投影来消除加性高光，但是也没啥用，你可以看相应代码已经对应日志进行分析
 
-4.通过实验发现若不把光照不变特征与原始RGB特征卷积融合，只使用光照不变特征，则检测精度急剧下降，只有30左右的mAP 
+4. 对于类似DENet，FeatEnHancer等类似方法，是加了一个所谓的多尺度特征，虽然可能确实有效，但是很黑箱，给不了我什么启发 
 
-5.注意到$\begin{aligned}log(M_{rb})&=log(\rho^{R_{p_1}}(\lambda))-log(\rho^{R_{p_2}}(\lambda))\\&+log(\rho^{B_{p_2}}(\lambda))-log(\rho^{B_{p_1}}(\lambda))\end{aligned}$交叉色比得到的不是纯单通道光照不变特征，而是不同像素的不同通道的光照不变特征的和或者差
-6.![image-20260207103217198](./research-ideas/image-20260207103217198.png)
+5. 梯度域色比
 
-yola论文这里零均值约束有错误，我默认他是$e^{R_{p_{i}}}\approx e^{B_{p_i}}$，也就是本来光谱能量的假设应该是相邻像素的同一通道是相近的，但是他又进行了白光的近似，也就是同一像素不同通道的光谱能量是差不多的
+     对空间取梯度 $\nabla$（Sobel 算子）：
 
-请给我新的低光检测的即插即用思路
+     $$\nabla[\log I_R - \log I_G] = \nabla\log\frac{R_R}{R_G} + \nabla\log\frac{L_R}{L_G} + \nabla\epsilon(S)$$
+
+   梯度域和像素域我貌似都尝试过了（尝试过sobel算子，虽然没有转到log域，但是我感觉没有理论支持，即便有效果你也没有理由说服我，只是实验性的成功；像素域难点在于如何有效的预测高光，预测后如何有效消除高光从而将处理后的优质数据送入log域进行不变特征学习），频域你这感觉是否就是纯和FRBNet一样了。
+
+6. 没有raw文件，只有Exdark和darkface等低光目标检测数据集，因为合成数据是非常昂贵的，因此不考虑使用额外复杂的合成数据
+
+7. 通过实验发现若不把光照不变特征与原始RGB特征卷积融合，只使用光照不变特征，则检测精度急剧下降，只有30左右的mAP
+
+8. 注意到$\begin{aligned}log(M_{rb})&=log(\rho^{R_{p_1}}(\lambda))-log(\rho^{R_{p_2}}(\lambda))\\&+log(\rho^{B_{p_2}}(\lambda))-log(\rho^{B_{p_1}}(\lambda))\end{aligned}$交叉色比得到的不是纯单通道光照不变特征，而是不同像素的不同通道的光照不变特征的和或者差
+
+9. yola论文这里零均值约束有错误，我默认他是$e^{R_{p_{i}}}\approx e^{B_{p_i}}$，也就是本来光谱能量的假设应该是相邻像素的同一通道是相近的，但是他又进行了白光的近似，也就是同一像素不同通道的光谱能量是差不多的![image-20260207103217198](./research-ideas/image-20260207103217198.png)
+
+
+和老师讨论后又有以下思路：
+
+1. RGB+不变特征+频域高光->融合
+2. 小波提取不同频率分量+RGB分别做不同处理，这里我忘记具体思路是什么了，你可以分析并推理
+
+老师的思考只是尝试性的建议，并不一定正确和有效，请分析是否合理，你又有什么额外的建议与思路，你提出的方法必须能让我心服口服，所以在提出方法前你需要严谨自证 
+
+
+
+## 注意事项
+
+一些网络代码和配置代码已经放入对应的无用废案文件夹，你可以尝试阅读我已经做过了什么，分析不足和值得坚持的地方，从而给我提供一些建议或参考。
 
 
 
 
 
+### 失败路线结案表
 
+| **路线**                             | **实验证据**                                                 | **失败机理**                                             | **结论**                           |
+| ------------------------------------ | ------------------------------------------------------------ | -------------------------------------------------------- | ---------------------------------- |
+| **纯不变特征（去RGB）**              | mAP=0.3478 vs YOLOv3+YOLA 0.7324                             | 丢失语义与纹理细节，IIM不能单独承载检测                  | 彻底停止                           |
+| **显式高光预测+校正（LARC）**        | 峰值约 0.7314（YOLOv3），不优于基线 0.7324；且 loss_error 全程0 | 分支训练退化（实现上被“锁死”）+ 任务不可辨识             | 这条实现判死；同类路线不再作为主线 |
+| **正交投影去高光（LOSP 单流）**      | TOOD: 0.7489 -> 0.7498/0.7477（几乎无增益）；YOLOv3: 0.7324 -> ~0.716（明显掉） | 全局投影对类别有结构性副作用（救了反光类，伤了非反光类） | 不再主推                           |
+| **LOSP 双流残差**                    | TOOD峰值约 0.7448（低于基线）                                | 仍是“全局先处理再融合”的旧范式，没解决选择性问题         | 停止                               |
+| **全局频域分支（HFE + frequency）**  | 0.7489 vs reflected-only 0.7499                              | 频域全局滤波对检测目标不够任务对齐                       | 不作为主线                         |
+| **梯度域强化分支（HFE + gradient）** | 0.7486 vs reflected-only 0.7499                              | 边缘增强≠检测增益，易引入噪声放大                        | 不作为主线                         |
+| **低维门控替代拼接卷积（你已反思）** | 你历史 v2/v2_improved 文档也显示掉点                         | 与拼接卷积在表达上近似等价，常退化为“加参数不加信息”     | 不再单独立项                       |
 
-
+------
 
 
 
