@@ -4,7 +4,7 @@ published: 2026-03-02 18:00
 tags:
   - cpp
 category: CPP
-description: `#define`、`typedef`、`using` (C++11) 的用法、区别以及底层原理。
+description: #define、typedef、using (C++11) 的用法、区别以及底层原理。
 ---
 
 
