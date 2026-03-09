@@ -14,7 +14,7 @@ Windows 下 C 盘爆红简直是开发者的噩梦，Conda 默认的 `pkgs` 和 
 
 ------
 
-### 第一部分：以 Conda 视角快速掌握 uv
+### 一、以 Conda 视角快速掌握 uv
 
 Conda 和 uv 最大的**核心理念差异**在于：
 
@@ -34,9 +34,23 @@ Conda 和 uv 最大的**核心理念差异**在于：
 
 > **一句话总结**：在 uv 中，你不再需要去维护一个庞大的全局环境列表。你只需要进到项目目录 -> `uv venv` -> `uv pip install` -> 开发。
 
+
+
 ------
 
-### 第二部分：解决 Windows 下 uv 占用 C 盘的问题
+### 二、UV安装
+
+去[github仓库](https://github.com/astral-sh/uv/releases)下载二进制程序即可。
+
+```bash
+uv --version    # 检查命令是否可用
+```
+
+
+
+---
+
+### 三、解决 Windows 下 uv 占用 C 盘的问题
 
 uv 和 Conda 一样，会在后台缓存大量下载的包、Python 解释器等。在 Windows 下，它默认把东西存在 `%LOCALAPPDATA%\uv`（也就是 `C:\Users\你的用户名\AppData\Local\uv`）。
 
@@ -77,8 +91,9 @@ uv 和 Conda 一样，会在后台缓存大量下载的包、Python 解释器等
 
    Bash
 
-   ```
-   uv cache dir
+   ```bash
+   uv cache dir    # 检查缓存是否成功指向 E 盘
+   uv python dir   # 检查 Python 存放是否成功指向 E 盘
    ```
 
    如果输出的是 `D:\uv_data\cache`，说明成功了！
@@ -87,6 +102,3 @@ uv 和 Conda 一样，会在后台缓存大量下载的包、Python 解释器等
 
 ------
 
-做完这些，你的 C 盘就得救了，同时你也可以享受 uv 带来的极速体验。
-
-需要我带你实操演示一下，如何用 uv 把你手头现有的一个 Conda 项目（比如带有 `environment.yml` 或 `requirements.txt` 的项目）完整迁移过来吗？
