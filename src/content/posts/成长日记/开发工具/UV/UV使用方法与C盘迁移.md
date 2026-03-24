@@ -46,8 +46,6 @@ Conda 和 uv 最大的**核心理念差异**在于：
 uv --version    # 检查命令是否可用
 ```
 
-
-
 ---
 
 ### 三、解决 Windows 下 uv 占用 C 盘的问题
@@ -89,16 +87,45 @@ uv 和 Conda 一样，会在后台缓存大量下载的包、Python 解释器等
 
 2. 输入命令检查是否生效：
 
-   Bash
-
    ```bash
-   uv cache dir    # 检查缓存是否成功指向 E 盘
+uv cache dir    # 检查缓存是否成功指向 E 盘
    uv python dir   # 检查 Python 存放是否成功指向 E 盘
    ```
-
+   
    如果输出的是 `D:\uv_data\cache`，说明成功了！
 
 3. **释放 C 盘空间**：你可以放心地去 `C:\Users\你的用户名\AppData\Local\uv` 目录下，把里面的 `cache`、`python` 等文件夹直接**删除**（或者剪切到你新建的 D 盘目录里）。
 
 ------
 
+### 四、避坑指南：uv add 与 uv pip 的严格界限
+
+很多 Conda 转型用户最容易踩的坑，就是混淆了包管理的命令域。**切记以下铁律**：
+
+- **场景 A：在纯 uv 项目中（当前目录有 `pyproject.toml`）** 👉 **必须使用 `uv add <包名>`**
+  - *原因*：它不仅下载包，还会将依赖关系写入配置，并生成 `uv.lock` 文件。如果你在这里用 `uv pip install`，包虽然装上了，但不会记录在案，项目失去复刻能力。
+- **场景 B：在传统 Conda 环境中（`conda activate my_env`）** 👉 **必须使用 `uv pip install <包名>`**
+  - *原因*：`uv pip` 是底层操作，直接操作当前激活的 Python 环境。Conda 环境没有 `pyproject.toml`，如果强行运行 `uv add`，uv 会因为找不到项目配置文件而报错或行为异常。在此场景下，uv 只是一个带了涡轮增压的快速 pip。
+
+### 五、团队协作与环境完美复刻 (uv sync)
+
+Conda 过去靠导出 `environment.yml` 来同步环境，容易出现跨平台依赖冲突。uv 引入了现代化的锁文件机制。
+
+- **依赖锁定**：当你使用 `uv add` 时，uv 会自动生成一个 `uv.lock` 文件。它记录了所有依赖包及其子依赖的**精确版本号、来源和哈希值**。
+
+- **一键复刻项目**： 如果要在新电脑上运行现有项目，或者团队成员拉取了你的代码（包含 `pyproject.toml` 和 `uv.lock`），**只需执行一步：**
+
+  ```Bash
+  uv sync
+  ```
+
+  **魔法发生**：uv 会自动检测所需的 Python 版本并下载，自动在本地创建 `.venv`，然后严格按照 `uv.lock` 100% 还原你的环境，彻底告别“在我的电脑上明明能跑”的玄学问题。
+
+### 六、终极双打方案：应对深度学习 (CUDA/C++) 场景
+
+对于需要现场编译 C++ 扩展或依赖复杂系统级底层库（如 MMDetection、特定版 CUDA Toolkit）的硬核科研项目，uv 无法独立完成。
+
+**最佳实践：“Conda 筑基，uv 装修”**
+
+1. 用 Conda 搞定底层建筑： `conda create -n ai_env python=3.10` `conda activate ai_env` `conda install -c nvidia cuda-toolkit=11.8`
+2. 用 uv 极速安装 Python 层依赖： `uv pip install torch torchvision torchaudio --index-url ...`
