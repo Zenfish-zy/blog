@@ -5,7 +5,9 @@ tags:
   - WSL
   - Windows
   - Linux
-category: 成长日记/Linux
+category:
+  - 成长日记
+  - Linux
 description: WSL2 安装、迁移、优化与维护的完整技术指南
 ---
 

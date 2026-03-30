@@ -2,9 +2,13 @@
 title: git如何提pr
 published: 2026-03-30 16:55
 tags:
-  - git
-  - pr
-category: git
+  - Git
+  - GitHub
+  - Pull Request
+category:
+  - 成长日记
+  - 开发工具
+  - Git
 description: git如何提pr
 ---
 

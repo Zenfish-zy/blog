@@ -5,7 +5,11 @@ tags:
   - Python
   - Pip
   - Conda
-category: 成长日记/Python
+  - 镜像源
+category:
+  - 成长日记
+  - 开发工具
+  - Python
 description: pip 和 conda 临时/永久换源为清华、阿里、腾讯等国内镜像的完整命令速查
 ---
 

@@ -3,9 +3,11 @@ title: Hexo 小白入门指南
 published: 2026-01-26
 tags:
   - Hexo
-  - 博客
-  - 教程
-category: 博客搭建
+  - GitHub Pages
+  - 入门
+category:
+  - 博客搭建
+  - Hexo
 description: 作为一个刚入门的小白，我在搭建 Hexo 博客的过程中踩了不少坑。这篇文章总结了我的学习经验，希望能帮助到同样是新手的你！
 ---
 

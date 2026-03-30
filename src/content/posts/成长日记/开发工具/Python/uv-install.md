@@ -3,9 +3,12 @@ title: UV Python 包管理器安装与卸载
 published: 2026-02-05
 tags:
   - Python
-  - UV
-  - 包管理器
-category: 成长日记/Python
+  - uv
+  - 包管理
+category:
+  - 成长日记
+  - 开发工具
+  - Python
 description: uv - 极速 Python 包管理器的多平台安装方法及卸载指南
 ---
 

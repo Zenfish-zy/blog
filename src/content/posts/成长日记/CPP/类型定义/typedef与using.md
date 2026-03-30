@@ -2,8 +2,13 @@
 title: 类型别名与宏定义的本质区别
 published: 2026-03-02 18:00
 tags:
-  - cpp
-category: CPP
+  - C++
+  - typedef
+  - using
+category:
+  - 成长日记
+  - 编程语言
+  - C++
 description: "#define、typedef、using (C++11) 的用法、区别以及底层原理。"
 ---
 

@@ -4,8 +4,11 @@ published: 2026-02-05
 tags:
   - Python
   - Linux
-  - Conda
-category: 成长日记/Python
+  - 虚拟环境
+category:
+  - 成长日记
+  - 开发工具
+  - Python
 description: Linux 下使用 conda 或 venv 创建并激活虚拟环境运行 Python
 ---
 

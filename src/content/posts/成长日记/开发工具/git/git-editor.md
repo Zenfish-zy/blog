@@ -2,8 +2,12 @@
 title: git修改默认编辑器
 published: 2026-02-05
 tags:
-  - git
-category: git
+  - Git
+  - 编辑器
+category:
+  - 成长日记
+  - 开发工具
+  - Git
 description: Git 配置系统详解，包括如何修改默认编辑器为 VSCode 或 Notepad++
 ---
 # Git 配置系统教程

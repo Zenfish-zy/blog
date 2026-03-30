@@ -1,8 +1,14 @@
 ---
 title: "FRP 跨局域网 SSH 互通搭建"
 published: 2026-02-05
-tags: [FRP, 内网穿透, SSH]
-category: 成长日记/远程连接
+tags:
+  - FRP
+  - 内网穿透
+  - SSH
+category:
+  - 成长日记
+  - 远程连接
+  - 内网穿透
 description: "基于 FRP 的跨局域网多设备 SSH 互通系统搭建，通过公网服务器作为中转节点实现内网设备之间的安全 SSH 连接"
 ---
 

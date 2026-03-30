@@ -2,10 +2,13 @@
 title: VSCode SSH 远程连接与免密登录配置
 published: 2026-02-05
 tags:
-  - VSCode
+  - VS Code
   - SSH
-  - 远程开发
-category: 成长日记/远程连接
+  - 免密登录
+category:
+  - 成长日记
+  - 远程连接
+  - SSH
 description: Windows 使用 VSCode Remote-SSH 插件连接 Linux 服务器，配置免密登录的完整教程
 ---
 

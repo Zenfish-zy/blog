@@ -1,8 +1,14 @@
 ---
 title: "MMCV 安装问题排查"
 published: 2026-02-05
-tags: [MMCV, MMDetection]
-category: 成长日记/深度学习
+tags:
+  - MMCV
+  - MMDetection
+  - 安装
+category:
+  - 成长日记
+  - 深度学习
+  - MMDetection
 description: "解决 MMCV 安装中的 no module named 'mmcv._ext' 等问题，手动编译 MMCV 指南"
 ---
 

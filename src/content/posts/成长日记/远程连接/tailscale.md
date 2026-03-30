@@ -4,8 +4,11 @@ published: 2026-02-05
 tags:
   - Tailscale
   - 内网穿透
+  - 组网
+category:
+  - 成长日记
   - 远程连接
-category: 成长日记/远程连接
+  - 内网穿透
 description: Tailscale 零配置内网穿透方案，实现跨网络 SSH 连接和文件传输
 ---
 

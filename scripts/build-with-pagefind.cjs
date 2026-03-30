@@ -51,6 +51,12 @@ function main() {
   console.log(`📁 Pagefind output directory: ${outputDir}`);
   
   try {
+    // Clear Astro cache to avoid stale content-store collisions on repeated builds.
+    execSync(`node scripts/reset-astro-cache.cjs`.trim(), {
+      stdio: 'inherit',
+      cwd: process.cwd()
+    });
+
     // Run Astro build
     console.log('🔨 Running Astro build...');
     execSync(`npx astro build`.trim(), { 

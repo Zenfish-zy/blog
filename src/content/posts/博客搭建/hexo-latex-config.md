@@ -5,9 +5,9 @@ tags:
   - Hexo
   - Fluid
   - LaTeX
-  - 数学公式
-  - 博客配置
-category: 博客搭建
+category:
+  - 博客搭建
+  - Hexo
 description: 在写技术博客或科研笔记时，经常需要使用数学公式。本文记录如何在 Hexo + Fluid 主题中配置 LaTeX 公式渲染。
 ---
 

@@ -2,8 +2,13 @@
 title: 从 CPU 缓存到底层并发控制
 published: 2026-03-12 11:23
 tags:
-  - cpp
-category: CPP
+  - C++
+  - CPU缓存
+  - 并发
+category:
+  - 成长日记
+  - 编程语言
+  - C++
 description: 从 CPU 缓存到底层并发控制
 ---
 

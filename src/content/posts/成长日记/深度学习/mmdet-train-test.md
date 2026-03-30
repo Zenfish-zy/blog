@@ -1,8 +1,14 @@
 ---
 title: "MMDetection 训练与测试"
 published: 2026-02-05
-tags: [MMDetection, 目标检测]
-category: 成长日记/深度学习
+tags:
+  - MMDetection
+  - 训练
+  - 测试
+category:
+  - 成长日记
+  - 深度学习
+  - MMDetection
 description: "MMDetection 训练和测试相关文档索引，包括配置文件、推理、数据集准备等"
 ---
 

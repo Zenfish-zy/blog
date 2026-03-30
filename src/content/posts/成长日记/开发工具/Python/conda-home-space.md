@@ -1,8 +1,14 @@
 ---
 title: "Conda 指定虚拟环境路径（Home空间不足）"
 published: 2026-02-05
-tags: [Conda, 疑难杂症]
-category: 成长日记/开发工具
+tags:
+  - Python
+  - Conda
+  - 路径迁移
+category:
+  - 成长日记
+  - 开发工具
+  - Python
 description: "当 Home 目录空间不足时，如何指定 Conda 虚拟环境和缓存的安装位置"
 ---
 

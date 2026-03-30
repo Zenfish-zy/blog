@@ -5,7 +5,10 @@ tags:
   - Python
   - Conda
   - Pip
-category: 成长日记/Python
+category:
+  - 成长日记
+  - 开发工具
+  - Python
 description: Conda 环境下包管理的最佳实践，避免依赖冲突的使用策略
 ---
 

@@ -1,8 +1,13 @@
 ---
 title: "MMDetection 接口文档"
 published: 2026-02-05
-tags: [MMDetection, API]
-category: 成长日记/深度学习
+tags:
+  - MMDetection
+  - API
+category:
+  - 成长日记
+  - 深度学习
+  - MMDetection
 description: "MMDetection 框架 API 文档索引，包括 mmdet.apis、datasets、engine、evaluation、models 等模块"
 ---
 

@@ -1,8 +1,11 @@
 ---
 title: 鞭笞AI给我思路
 published: 2026-02-03 12:58
-tags: []
-category: 科研笔记
+tags:
+  - 研究思路
+category:
+  - 科研笔记
+  - 研究思路
 description: 以yola和FRBNet为根基的低光检测思路
 ---
 

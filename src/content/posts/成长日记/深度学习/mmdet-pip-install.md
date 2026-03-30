@@ -1,8 +1,14 @@
 ---
 title: "pip install -e . 报错排查"
 published: 2026-02-05
-tags: [MMDetection, Pip]
-category: 成长日记/深度学习
+tags:
+  - MMDetection
+  - Pip
+  - 安装
+category:
+  - 成长日记
+  - 深度学习
+  - MMDetection
 description: "解决 MMDetection pip install -e . 安装报错问题，特别是新显卡兼容性问题"
 ---
 

@@ -4,8 +4,11 @@ published: 2026-02-05
 tags:
   - PyTorch
   - CUDA
+  - 环境配置
+category:
+  - 成长日记
   - 深度学习
-category: 成长日记/深度学习
+  - 环境配置
 description: PyTorch 历史版本安装命令及 CUDA 版本对应关系速查
 ---
 

@@ -2,8 +2,14 @@
 title: 仿函数、回调与 `std::function` 的底层逻辑
 published: 2026-03-09 14:25
 tags:
-  - cpp
-category: CPP
+  - C++
+  - 仿函数
+  - 回调
+  - std::function
+category:
+  - 成长日记
+  - 编程语言
+  - C++
 description: 仿函数、回调与 `std::function` 的底层逻辑
 ---
 

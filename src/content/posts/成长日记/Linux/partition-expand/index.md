@@ -4,8 +4,10 @@ published: 2026-02-05
 tags:
   - Linux
   - LVM
-  - 分区管理
-category: 成长日记/Linux
+  - 分区扩容
+category:
+  - 成长日记
+  - Linux
 description: Ubuntu 系统下使用 LVM 在线扩容根分区的完整操作指南，无需重装系统
 ---
 

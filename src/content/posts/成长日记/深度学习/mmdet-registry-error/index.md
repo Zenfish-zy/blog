@@ -1,8 +1,14 @@
 ---
 title: "MMDetection 注册表 KeyError 排查"
 published: 2026-02-05
-tags: [MMDetection, 疑难杂症]
-category: 成长日记/深度学习
+tags:
+  - MMDetection
+  - 注册表
+  - 疑难杂症
+category:
+  - 成长日记
+  - 深度学习
+  - MMDetection
 description: "解决 MMDetection 自定义模型注册表 KeyError 问题，使用 custom_imports 正确导入自定义模块"
 ---
 

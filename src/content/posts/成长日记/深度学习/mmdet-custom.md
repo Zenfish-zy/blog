@@ -1,8 +1,14 @@
 ---
 title: "MMDetection 自定义模型与数据集"
 published: 2026-02-05
-tags: [MMDetection, 目标检测, 深度学习]
-category: 成长日记/深度学习
+tags:
+  - MMDetection
+  - 目标检测
+  - 自定义训练
+category:
+  - 成长日记
+  - 深度学习
+  - MMDetection
 description: "MMDetection 框架自定义模型组件（backbone、neck、head、loss）和数据集的详细教程"
 ---
 

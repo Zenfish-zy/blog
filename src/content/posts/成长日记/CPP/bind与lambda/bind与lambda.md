@@ -2,8 +2,13 @@
 title: std::bind vs Lambda
 published: 2026-03-10 10:14
 tags:
-  - cpp
-category: CPP
+  - C++
+  - Lambda
+  - std::bind
+category:
+  - 成长日记
+  - 编程语言
+  - C++
 description: std::bind vs Lambda
 ---
 

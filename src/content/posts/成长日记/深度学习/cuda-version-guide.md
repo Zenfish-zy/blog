@@ -4,8 +4,11 @@ published: 2026-02-05
 tags:
   - CUDA
   - PyTorch
+  - 版本兼容
+category:
+  - 成长日记
   - 深度学习
-category: 成长日记/深度学习
+  - 环境配置
 description: 理清 NVIDIA 驱动、CUDA Toolkit、PyTorch CUDA 运行时三者的关系与版本选择
 ---
 

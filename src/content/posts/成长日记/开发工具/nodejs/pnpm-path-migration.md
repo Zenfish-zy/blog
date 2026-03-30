@@ -2,8 +2,13 @@
 title: pnpm 路径迁移完全指南
 published: 2026-01-27
 tags:
+  - Node.js
   - pnpm
-category: 成长日记/开发工具
+  - 路径迁移
+category:
+  - 成长日记
+  - 开发工具
+  - Node.js
 description: 将 pnpm 的所有数据（缓存、全局包、硬链接仓库）从系统盘迁移到其他位置，以节省 C 盘空间并统一管理开发环境。
 ---
 

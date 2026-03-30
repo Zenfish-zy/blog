@@ -3,8 +3,10 @@ title: 目标检测简史
 published: 2026-01-30
 tags:
   - 目标检测
-  - 深度学习
-category: 科研笔记
+  - 综述
+category:
+  - 科研笔记
+  - 目标检测
 description: 从 R-CNN 到 Faster R-CNN 的发展历程，详解目标检测的评价指标与 NMS 算法。
 ---
 

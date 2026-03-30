@@ -1,8 +1,13 @@
 ---
 title: "WandB 离线模式数据上传"
 published: 2026-02-05
-tags: [WandB, 实验管理]
-category: 成长日记/开发工具
+tags:
+  - WandB
+  - 离线模式
+category:
+  - 成长日记
+  - 开发工具
+  - WandB
 description: "WandB 离线模式下如何同步实验数据到云端"
 ---
 

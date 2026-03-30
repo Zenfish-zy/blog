@@ -2,11 +2,13 @@
 title: 从 Hexo 迁移到 Twilight：完整博客搭建教程
 published: 2026-02-02 12:00
 tags:
+  - Hexo
   - Twilight
   - Astro
-  - 博客
-  - 教程
-category: 博客搭建
+  - 迁移
+category:
+  - 博客搭建
+  - Twilight
 description: 记录从 Hexo 迁移到 Twilight 博客主题的完整过程，包括环境搭建、内容迁移、个性化配置、踩坑记录和部署到 GitHub Pages。
 ---
 

@@ -4,8 +4,11 @@ published: 2026-02-05
 tags:
   - Linux
   - CUDA
+  - 环境配置
+category:
+  - 成长日记
   - 深度学习
-category: 成长日记/深度学习
+  - 环境配置
 description: Ubuntu 系统下 NVIDIA 显卡驱动安装、CUDA Toolkit 配置及环境变量设置完整指南
 ---
 

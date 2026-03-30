@@ -4,8 +4,10 @@ published: 2026-02-05
 tags:
   - Linux
   - Tmux
-  - 终端工具
-category: 成长日记/Linux
+  - 终端复用
+category:
+  - 成长日记
+  - Linux
 description: Tmux 后台运行、分屏操作、会话管理的极简教程与进阶技巧
 ---
 

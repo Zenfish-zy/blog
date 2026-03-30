@@ -2,8 +2,12 @@
 title: 安装 Rust
 published: 2026-03-30 18:59
 tags:
-  - rust
-category: rust/安装
+  - Rust
+  - 环境配置
+category:
+  - 成长日记
+  - 编程语言
+  - Rust
 description: 安装 Rust
 ---
 

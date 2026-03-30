@@ -2,8 +2,14 @@
 title: 以 Conda 视角快速掌握 uv
 published: 2026-03-09 15:17
 tags:
+  - Python
   - uv
-category: UV
+  - Conda
+  - 路径迁移
+category:
+  - 成长日记
+  - 开发工具
+  - Python
 description: 用 Conda 经验无缝理解 uv，然后解决 C 盘爆红的问题。
 ---
 太理解你了！现在 Python 社区确实有一股“弃 Conda 转 uv”的风潮。uv 主要是因为底层用 Rust 编写，速度极其夸张（安装和解析依赖比 conda/pip 快几十倍），而且把包管理和环境管理统一了。

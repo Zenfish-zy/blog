@@ -2,10 +2,12 @@
 title: 路由多分支 YOLA 实验记录
 published: 2026-01-27
 tags:
-  - 科研
-  - yola
-  - 多分支
-category: 科研笔记
+  - YOLA
+  - 目标检测
+  - 多分支路由
+category:
+  - 科研笔记
+  - 目标检测
 description: 多分支特征融合路由机制实验记录，包括 FRBNet、YOLA 对比及自定义路由融合方案的消融实验。
 ---
 

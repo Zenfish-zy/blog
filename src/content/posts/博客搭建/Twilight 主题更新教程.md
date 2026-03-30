@@ -6,9 +6,10 @@ description: 记录 Twilight Astro 博客主题的更新流程，包括备份、
 tags:
   - Twilight
   - Astro
-  - 博客
   - 主题更新
-category: 博客搭建
+category:
+  - 博客搭建
+  - Twilight
 draft: false
 ---
 
