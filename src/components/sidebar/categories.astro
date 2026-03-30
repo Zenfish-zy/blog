@@ -105,6 +105,10 @@ const { class: className, style, side = "default" } = Astro.props;
         transform: translateY(-0.35rem);
         pointer-events: none;
     }
+
+    .category-toggle[aria-expanded="true"] [data-category-toggle-icon] {
+        transform: rotate(90deg);
+    }
 </style>
 
 <script>
@@ -144,15 +148,6 @@ const { class: className, style, side = "default" } = Astro.props;
 
                 item.dataset.visible = this.isItemVisible(item) ? "true" : "false";
 
-                const toggle = item.querySelector("[data-category-toggle]");
-                const icon = item.querySelector("[data-category-toggle-icon]");
-
-                if (toggle instanceof HTMLElement && icon instanceof HTMLElement) {
-                    icon.classList.toggle(
-                        "rotate-90",
-                        toggle.getAttribute("aria-expanded") === "true",
-                    );
-                }
             });
         }
 

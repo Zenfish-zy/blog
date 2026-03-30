@@ -8,7 +8,7 @@ description: 安装 Rust
 ---
 
 
-# 安装 Rust
+# [安装 Rust]([beatai.org/rust-course/first-try/installation](https://beatai.org/rust-course/first-try/installation))
 
 `rustup` 是 Rust 的安装程序，也是它的版本管理程序。 强烈建议使用 `rustup` 来安装 Rust，当然如果你有异心，请寻找其它安装方式，然后再从下一节开始阅读。
 
