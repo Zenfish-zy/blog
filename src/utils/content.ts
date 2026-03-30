@@ -83,9 +83,11 @@ export async function getTagList(): Promise<Tag[]> {
 export type Category = {
     name: string;
     fullPath: string;
+    parentPath: string;
     count: number;
     url: string;
     level: number;
+    hasChildren: boolean;
 };
 
 export async function getCategoryList(): Promise<Category[]> {
@@ -132,9 +134,11 @@ export async function getCategoryList(): Promise<Category[]> {
         ret.push({
             name: segments[segments.length - 1],
             fullPath: c,
+            parentPath: joinCategoryPath(segments.slice(0, -1)),
             count: count[c],
             url: getCategoryUrl(c),
             level: segments.length - 1,
+            hasChildren: lst.some((candidate) => candidate !== c && candidate.startsWith(`${c}/`)),
         });
     }
 
@@ -143,9 +147,11 @@ export async function getCategoryList(): Promise<Category[]> {
         ret.push({
             name: uncategorizedName,
             fullPath: "",
+            parentPath: "",
             count: uncategorizedCount,
             url: getCategoryUrl(null),
             level: 0,
+            hasChildren: false,
         });
     }
 
