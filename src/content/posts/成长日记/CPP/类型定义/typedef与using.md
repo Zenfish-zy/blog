@@ -26,7 +26,7 @@ description: "#define、typedef、using (C++11) 的用法、区别以及底层�
 
 
 
-```C++
+```cpp
 #define PTR int* // 程序员的意图：定义两个整型指针 a 和 b
 PTR a, b; 
 
@@ -47,7 +47,7 @@ int* a, b;
 
 
 
-```C++
+```cpp
 typedef int* PTR; 
 
 // 程序员的意图：定义两个整型指针 a 和 b
@@ -61,7 +61,7 @@ PTR a, b;
 
 
 
-```C++
+```cpp
 typedef double wages;
 typedef wages base, *p; 
 ```
@@ -85,7 +85,7 @@ typedef wages base, *p;
 
 
 
-```C++
+```cpp
 using wages = double;    // wages 是 double
 using base = wages;      // base 是 wages (即 double)
 using p = wages*;        // p 是 wages* (即 double 指针)
@@ -120,7 +120,7 @@ using p = wages*;        // p 是 wages* (即 double 指针)
 
 
 
-```C++
+```cpp
 typedef char * pstring;
 ```
 
@@ -132,7 +132,7 @@ typedef char * pstring;
 
 
 
-```C++
+```cpp
 const pstring cstr = 0;
 ```
 
@@ -142,7 +142,7 @@ const pstring cstr = 0;
 
 
 
-```C++
+```cpp
 char * const cstr = 0; 
 ```
 
@@ -154,7 +154,7 @@ char * const cstr = 0;
 
 
 
-```C++
+```cpp
 const pstring *ps;
 ```
 
@@ -168,7 +168,7 @@ const pstring *ps;
 
 
 
-```C++
+```cpp
 char * const * ps;
 ```
 

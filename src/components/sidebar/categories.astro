@@ -38,27 +38,28 @@ const { class: className, style, side = "default" } = Astro.props;
 
             return (
                 <div
-                    class:list={["category-item", { hidden: c.level > 0 }]}
+                    class="category-item"
                     data-category-item
                     data-category-path={c.fullPath}
                     data-parent-path={c.parentPath}
                     data-level={String(c.level)}
+                    data-visible={c.level === 0 ? "true" : "false"}
                 >
                     <div
-                        class="group flex items-center gap-2 rounded-lg transition-colors hover:bg-(--btn-plain-bg-hover) active:bg-(--btn-plain-bg-active)"
+                        class="group flex items-center gap-2 rounded-lg transition-all duration-200 ease-out hover:bg-(--btn-plain-bg-hover) active:bg-(--btn-plain-bg-active)"
                         style={`padding-left: ${c.level * 0.85}rem`}
                     >
                         {c.hasChildren ? (
                             <button
                                 type="button"
-                                class="category-toggle flex h-10 w-8 shrink-0 items-center justify-center rounded-lg text-50 transition hover:text-(--primary)"
+                                class="category-toggle flex h-10 w-8 shrink-0 items-center justify-center rounded-lg text-50 transition-all duration-200 ease-out hover:text-(--primary)"
                                 data-category-toggle
                                 aria-expanded="false"
                                 aria-label={`Toggle ${fullDisplayName} subcategories`}
                             >
                                 <Icon
                                     name="material-symbols:chevron-right-rounded"
-                                    class="text-xl transition-transform"
+                                    class="text-xl transition-transform duration-200 ease-out"
                                     data-category-toggle-icon
                                 />
                             </button>
@@ -85,6 +86,26 @@ const { class: className, style, side = "default" } = Astro.props;
         })}
     </category-tree>
 </WidgetLayout>
+
+<style>
+    .category-item {
+        overflow: hidden;
+        max-height: 3.25rem;
+        opacity: 1;
+        transform: translateY(0);
+        transition:
+            max-height 220ms ease,
+            opacity 180ms ease,
+            transform 180ms ease;
+    }
+
+    .category-item[data-visible="false"] {
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(-0.35rem);
+        pointer-events: none;
+    }
+</style>
 
 <script>
     class CategoryTree extends HTMLElement {
@@ -121,7 +142,7 @@ const { class: className, style, side = "default" } = Astro.props;
                     return;
                 }
 
-                item.classList.toggle("hidden", !this.isItemVisible(item));
+                item.dataset.visible = this.isItemVisible(item) ? "true" : "false";
 
                 const toggle = item.querySelector("[data-category-toggle]");
                 const icon = item.querySelector("[data-category-toggle-icon]");

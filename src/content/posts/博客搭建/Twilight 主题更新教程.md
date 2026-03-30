@@ -48,7 +48,7 @@ cp -r ~/blog/Twilight ~/blog/Twilight-backup
 | 相册配置 | `public/albums/` | 作者提到 ✓ |
 | CMS 配置 | `public/admin/config.yml` | 作者提到 ✓ |
 | 站点配置 | `twilight.config.yaml` | 作者提到 ✓ |
-| 自定义脚注 | `public/FooterConfig.html` | 作者提到 ✓ |
+| 自定义脚注 | `FooterConfig.html` | 作者提到 ✓ |
 | **GitHub Actions** | `.github/workflows/` | ⚠️ **作者未提到，必须保留！** |
 | **构建配置** | `astro.config.mjs` | ⚠️ **含 base 路径，子目录部署必须！** |
 | **部署脚本** | `deploy.bat`, `backup.bat` | ⚠️ **作者未提到** |

@@ -10185,13 +10185,10 @@ var translate = {
             try {
                 jsObject = JSON.parse(jsString);
             } catch (e) {
-                try {
-                    jsObject = eval('(' + jsString + ')');
-                } catch (e) {
-                    translate.log(e)
-                    failureFunction(e);
-                    return;
-                }
+                const parseError = new Error('translate.js.transString() 现在只接受合法 JSON 字符串。请先将输入转换为 JSON。');
+                translate.log(parseError);
+                failureFunction(parseError);
+                return;
             }
             translate.js.transObject(jsObject, targetLanguage, successFunction, failureFunction);
         },

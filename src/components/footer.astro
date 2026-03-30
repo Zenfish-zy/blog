@@ -19,7 +19,6 @@ if (footerConfig.enable) {
         try {
             const footerConfigPath = path.join(
                 process.cwd(),
-                "public",
                 "FooterConfig.html",
             );
             customFooterHtml = fs.readFileSync(footerConfigPath, "utf-8");

@@ -115,7 +115,7 @@ Conda 过去靠导出 `environment.yml` 来同步环境，容易出现跨平台�
 
 - **一键复刻项目**： 如果要在新电脑上运行现有项目，或者团队成员拉取了你的代码（包含 `pyproject.toml` 和 `uv.lock`），**只需执行一步：**
 
-  ```Bash
+  ```bash
   uv sync
   ```
 

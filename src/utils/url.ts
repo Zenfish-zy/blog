@@ -70,7 +70,10 @@ export function getDir(path: string): string {
 }
 
 export function getFileDirFromPath(filePath: string): string {
-    return filePath.replace(/^src\//, "").replace(/\/[^/]+$/, "");
+    return filePath
+        .replace(/\\/g, "/")
+        .replace(/^src\//, "")
+        .replace(/\/[^/]+$/, "");
 }
 
 export function url(path: string) {

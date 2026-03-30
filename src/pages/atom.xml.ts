@@ -47,11 +47,12 @@ export async function GET(context: APIContext) {
         for (const img of images) {
             const src = img.getAttribute("src");
             if (!src) continue;
+            const decodedSrc = decodeURIComponent(src);
             // Handle content-relative images and convert them to built _astro paths
             if (
-                src.startsWith("./") ||
-                src.startsWith("../") ||
-                (!src.startsWith("http") && !src.startsWith("/"))
+                decodedSrc.startsWith("./") ||
+                decodedSrc.startsWith("../") ||
+                (!decodedSrc.startsWith("http") && !decodedSrc.startsWith("/"))
             ) {
                 let importPath: string | null = null;
                 // derive base directory from real file path to preserve casing
@@ -61,17 +62,17 @@ export async function GET(context: APIContext) {
                 const contentDir = contentDirRaw.startsWith("src/")
                     ? contentDirRaw
                     : `src/${contentDirRaw}`;
-                if (src.startsWith("./")) {
+                if (decodedSrc.startsWith("./")) {
                     // Path relative to the post file directory
-                    const prefixRemoved = src.slice(2);
+                    const prefixRemoved = decodedSrc.slice(2);
                     importPath = `/${contentDir}/${prefixRemoved}`;
-                } else if (src.startsWith("../")) {
+                } else if (decodedSrc.startsWith("../")) {
                     // Path like ../assets/images/xxx -> relative to /src/content/
-                    const cleaned = src.replace(/^\.\.\//, "");
+                    const cleaned = decodedSrc.replace(/^\.\.\//, "");
                     importPath = `/src/content/${cleaned}`;
                 } else {
                     // direct filename (no ./ prefix) - assume it's in the same directory as the post
-                    importPath = `/${contentDir}/${src}`;
+                    importPath = `/${contentDir}/${decodedSrc}`;
                 }
                 // import the image module dynamically
                 const imageMod = await imagesGlob[importPath]?.()?.then(
@@ -87,9 +88,9 @@ export async function GET(context: APIContext) {
                         `Failed to load image: ${importPath} for post: ${post.id}`,
                     );
                 }
-            } else if (src.startsWith("/")) {
+            } else if (decodedSrc.startsWith("/")) {
                 // images starting with `/` are in public dir
-                img.setAttribute("src", new URL(src, context.site).href);
+                img.setAttribute("src", new URL(decodedSrc, context.site).href);
             }
         }
 
