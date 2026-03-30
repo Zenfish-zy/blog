@@ -2,6 +2,8 @@ import { defineCollection } from "astro:content";
 import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 
+import { normalizeCategory } from "./utils/category";
+
 
 // Helper for handling dates that might be empty strings from JSON
 const dateSchema = z.preprocess((arg) => {
@@ -12,6 +14,11 @@ const optionalDateSchema = z.preprocess((arg) => {
     if (typeof arg === "string" && arg.trim() === "") return undefined;
     return arg;
 }, z.coerce.date().optional());
+const categorySchema = z
+    .union([z.string(), z.array(z.string())])
+    .optional()
+    .nullable()
+    .transform((value) => normalizeCategory(value));
 
 const postsCollection = defineCollection({
     loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/posts" }),
@@ -23,7 +30,7 @@ const postsCollection = defineCollection({
         description: z.string().optional().default(""),
         cover: z.string().optional().default(""),
         tags: z.array(z.string()).optional().default([]),
-        category: z.string().optional().nullable().default(""),
+        category: categorySchema,
         lang: z.string().optional().default(""),
         pinned: z.boolean().optional().default(false),
         author: z.string().optional().default(""),

@@ -1,5 +1,6 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 
+import { getCategorySegments, joinCategoryPath, normalizeCategory } from "@utils/category";
 import { getCategoryUrl } from "@utils/url";
 import { i18n } from "@i18n/translation";
 import I18nKey from "@i18n/i18nKey";
@@ -81,8 +82,10 @@ export async function getTagList(): Promise<Tag[]> {
 
 export type Category = {
     name: string;
+    fullPath: string;
     count: number;
     url: string;
+    level: number;
 };
 
 export async function getCategoryList(): Promise<Category[]> {
@@ -90,32 +93,61 @@ export async function getCategoryList(): Promise<Category[]> {
         return import.meta.env.PROD ? data.draft !== true : true;
     });
     const count: { [key: string]: number } = {};
+    let uncategorizedCount = 0;
+
     allBlogPosts.forEach((post: { data: { category: string | null } }) => {
-        if (!post.data.category) {
-            const ucKey = i18n(I18nKey.uncategorized);
-            count[ucKey] = count[ucKey] ? count[ucKey] + 1 : 1;
+        const categoryName = normalizeCategory(post.data.category);
+
+        if (!categoryName) {
+            uncategorizedCount++;
             return;
         }
 
-        const categoryName =
-            typeof post.data.category === "string"
-                ? post.data.category.trim()
-                : String(post.data.category).trim();
-
-        count[categoryName] = count[categoryName] ? count[categoryName] + 1 : 1;
+        const segments = getCategorySegments(categoryName);
+        segments.forEach((_, index) => {
+            const path = joinCategoryPath(segments.slice(0, index + 1));
+            count[path] = count[path] ? count[path] + 1 : 1;
+        });
     });
 
     const lst = Object.keys(count).sort((a, b) => {
-        return a.toLowerCase().localeCompare(b.toLowerCase());
+        const segmentsA = getCategorySegments(a);
+        const segmentsB = getCategorySegments(b);
+        const minLength = Math.min(segmentsA.length, segmentsB.length);
+
+        for (let index = 0; index < minLength; index++) {
+            const diff = segmentsA[index].localeCompare(segmentsB[index], undefined, { sensitivity: "base" });
+            if (diff !== 0) {
+                return diff;
+            }
+        }
+
+        return segmentsA.length - segmentsB.length;
     });
 
     const ret: Category[] = [];
     for (const c of lst) {
+        const segments = getCategorySegments(c);
+
         ret.push({
-            name: c,
+            name: segments[segments.length - 1],
+            fullPath: c,
             count: count[c],
             url: getCategoryUrl(c),
+            level: segments.length - 1,
         });
     }
+
+    if (uncategorizedCount > 0) {
+        const uncategorizedName = i18n(I18nKey.uncategorized);
+        ret.push({
+            name: uncategorizedName,
+            fullPath: "",
+            count: uncategorizedCount,
+            url: getCategoryUrl(null),
+            level: 0,
+        });
+    }
+
     return ret;
 }

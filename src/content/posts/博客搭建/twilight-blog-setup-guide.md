@@ -84,15 +84,25 @@ published: 2026-01-15 10:30
 tags:
   - 标签1
   - 标签2
-category: 分类名
+category:
+  - 一级分类
+  - 二级分类
 description: 文章描述
 ---
 ```
 
 主要变化：
 - `date` → `published`
-- `categories`（数组）→ `category`（字符串）
+- `categories`（数组）→ `category`（层级数组，渲染为多级分类）
 - 新增 `description` 字段
+
+如果你已有旧文章写成 `category: 成长日记/深度学习`，Twilight 也能兼容，但更推荐统一改成数组写法：
+
+```yaml
+category:
+  - 成长日记
+  - 深度学习
+```
 
 ### 迁移步骤
 
@@ -395,7 +405,7 @@ enable = true
 hide = false
 order = 2
 hotkey = "ctrl+alt+t"
-template = "---\ntitle: \npublished: {{datetime}}\ntags:\n  - \ncategory: \ndescription: \n---"
+template = "---\ntitle: \npublished: {{datetime}}\ntags:\n  - \ncategory:\n  - \n  - \ndescription: \n---"
 ```
 
 ### 插件代码

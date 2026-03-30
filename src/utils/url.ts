@@ -1,5 +1,6 @@
 import type { CollectionEntry } from "astro:content";
 
+import { normalizeCategory } from "@utils/category";
 import { i18n } from "@i18n/translation";
 import I18nKey from "@i18n/i18nKey";
 
@@ -47,14 +48,15 @@ export function getTagUrl(tag: string): string {
     return url(`/archive/?tag=${encodeURIComponent(tag.trim())}`);
 }
 
-export function getCategoryUrl(category: string | null): string {
+export function getCategoryUrl(category: string | string[] | null): string {
+    const normalizedCategory = normalizeCategory(category);
+
     if (
-        !category ||
-        category.trim() === "" ||
-        category.trim().toLowerCase() === i18n(I18nKey.uncategorized).toLowerCase()
+        !normalizedCategory ||
+        normalizedCategory.toLowerCase() === i18n(I18nKey.uncategorized).toLowerCase()
     )
         return url("/archive/?uncategorized=true");
-    return url(`/archive/?category=${encodeURIComponent(category.trim())}`);
+    return url(`/archive/?category=${encodeURIComponent(normalizedCategory)}`);
 }
 
 export function getDir(path: string): string {

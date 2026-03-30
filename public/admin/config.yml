@@ -42,7 +42,7 @@ collections:
             - # 标签
                 {label: "Tags", name: "tags", widget: "list", default: [], required: false}
             - # 分类
-                {label: "Category", name: "category", widget: "string", required: false}
+                {label: "Category", name: "category", widget: "list", default: [], required: false}
             - # 草稿
                 {label: "Draft", name: "draft", widget: "boolean", default: false}
             - # 正文

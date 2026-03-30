@@ -1,6 +1,7 @@
 <script lang="ts">
 import { onMount } from "svelte";
 
+import { categoryMatchesFilter, normalizeCategory } from "@utils/category";
 import { getPostUrl } from "@utils/url";
 import { i18n } from "@i18n/translation";
 import I18nKey from "@i18n/i18nKey";
@@ -35,7 +36,9 @@ let uncategorized = $state<string | null>(null);
 onMount(() => {
     const params = new URLSearchParams(window.location.search);
     tags = params.has("tag") ? params.getAll("tag") : [];
-    categories = params.has("category") ? params.getAll("category") : [];
+    categories = params.has("category")
+        ? params.getAll("category").map((category) => normalizeCategory(category)).filter(Boolean)
+        : [];
     uncategorized = params.get("uncategorized");
 });
 
@@ -69,12 +72,12 @@ let groups = $derived.by(() => {
 
     if (categories.length > 0) {
         filteredPosts = filteredPosts.filter(
-            (post) => post.data.category && categories.includes(post.data.category),
+            (post) => categories.some((category) => categoryMatchesFilter(post.data.category, category)),
         );
     }
 
     if (uncategorized !== null) {
-        filteredPosts = filteredPosts.filter((post) => !post.data.category);
+        filteredPosts = filteredPosts.filter((post) => normalizeCategory(post.data.category) === "");
     }
 
     // 按发布时间倒序排序，确保不受置顶影响
