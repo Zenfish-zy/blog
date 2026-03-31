@@ -10,7 +10,6 @@ category:
   - 编程语言
   - Python
 description: "当 Home 目录空间不足时，如何指定 Conda 虚拟环境和缓存的安装位置"
-routeName: 成长日记/开发工具/python/conda-home-space
 ---
 
 ## 创建虚拟环境

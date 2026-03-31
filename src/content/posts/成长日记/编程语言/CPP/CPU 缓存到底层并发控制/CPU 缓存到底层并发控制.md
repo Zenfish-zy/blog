@@ -10,7 +10,6 @@ category:
   - 编程语言
   - C++
 description: 从 CPU 缓存到底层并发控制
-routeName: 成长日记/cpp/cpu-缓存到底层并发控制/cpu-缓存到底层并发控制
 ---
 
 # 核心学习笔记：从 CPU 缓存到底层并发控制

@@ -10,7 +10,6 @@ category:
   - Python
   - WandB
 description: "解决 WandB 连接超时问题，通过设置代理 BASE_URL"
-routeName: 成长日记/开发工具/wandb/wandb-timeout
 ---
 
 ## 解决方法

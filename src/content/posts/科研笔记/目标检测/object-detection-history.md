@@ -8,7 +8,6 @@ category:
   - 科研笔记
   - 目标检测
 description: 从 R-CNN 到 Faster R-CNN 的发展历程，详解目标检测的评价指标与 NMS 算法。
-routeName: 科研笔记/object-detection-history
 ---
 
 ## 发展历程

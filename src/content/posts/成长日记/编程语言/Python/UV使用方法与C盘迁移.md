@@ -11,7 +11,6 @@ category:
   - 编程语言
   - Python
 description: 用 Conda 经验无缝理解 uv，然后解决 C 盘爆红的问题。
-routeName: 成长日记/开发工具/uv/uv使用方法与c盘迁移
 ---
 太理解你了！现在 Python 社区确实有一股“弃 Conda 转 uv”的风潮。uv 主要是因为底层用 Rust 编写，速度极其夸张（安装和解析依赖比 conda/pip 快几十倍），而且把包管理和环境管理统一了。
 

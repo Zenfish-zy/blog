@@ -10,7 +10,6 @@ category:
   - 编程语言
   - Python
 description: Conda 环境下包管理的最佳实践，避免依赖冲突的使用策略
-routeName: 成长日记/开发工具/python/conda-pip-tips
 ---
 
 在 Conda 环境下，一般**优先推荐使用 Conda 安装包**，只有在 Conda 找不到你需要的包时，**再使用 pip**。原因如下：

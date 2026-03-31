@@ -11,7 +11,6 @@ category:
   - 博客搭建
   - Twilight
 draft: false
-routeName: 博客搭建/twilight-主题更新教程
 ---
 
 ## 前言

@@ -10,7 +10,6 @@ category:
   - Python
   - WandB
 description: "WandB 离线模式下如何同步实验数据到云端"
-routeName: 成长日记/开发工具/wandb/wandb-offline
 ---
 
 ## 1. 检查离线数据位置

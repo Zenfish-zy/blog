@@ -11,7 +11,6 @@ category:
   - 编程语言
   - C++
 description: 仿函数、回调与 `std::function` 的底层逻辑
-routeName: 成长日记/cpp/仿函数回调与function的底层逻辑/仿函数回调与-stdfunction-的底层逻辑
 ---
 
 

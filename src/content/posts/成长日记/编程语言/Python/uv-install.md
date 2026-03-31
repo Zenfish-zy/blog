@@ -10,7 +10,6 @@ category:
   - 编程语言
   - Python
 description: uv - 极速 Python 包管理器的多平台安装方法及卸载指南
-routeName: 成长日记/开发工具/python/uv-install
 ---
 
 # 安装 uv

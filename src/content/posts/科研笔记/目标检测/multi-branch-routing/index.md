@@ -9,7 +9,6 @@ category:
   - 科研笔记
   - 目标检测
 description: 多分支特征融合路由机制实验记录，包括 FRBNet、YOLA 对比及自定义路由融合方案的消融实验。
-routeName: 科研笔记/multi-branch-routing
 ---
 
 # 指标

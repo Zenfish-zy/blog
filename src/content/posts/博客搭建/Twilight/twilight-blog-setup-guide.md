@@ -10,7 +10,6 @@ category:
   - 博客搭建
   - Twilight
 description: 记录从 Hexo 迁移到 Twilight 博客主题的完整过程，包括环境搭建、内容迁移、个性化配置、踩坑记录和部署到 GitHub Pages。
-routeName: 博客搭建/twilight-blog-setup-guide
 ---
 
 ## 前言

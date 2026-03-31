@@ -9,7 +9,6 @@ category:
   - 编程语言
   - Rust
 description: 安装 Rust
-routeName: 成长日记/rust/安装rust
 ---
 
 

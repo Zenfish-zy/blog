@@ -10,7 +10,6 @@ category:
   - 编程语言
   - C++
 description: "#define、typedef、using (C++11) 的用法、区别以及底层原理。"
-routeName: 成长日记/cpp/类型定义/typedef与using
 ---
 
 

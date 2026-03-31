@@ -9,7 +9,6 @@ category:
   - 科研笔记
   - 目标检测
 description: 基于正交子空间投影的高光消除方法，用于低光目标检测。
-routeName: 科研笔记/losp
 ---
 
 ## 核心思想

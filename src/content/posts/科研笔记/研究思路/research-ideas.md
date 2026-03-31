@@ -7,7 +7,6 @@ category:
   - 科研笔记
   - 研究思路
 description: 以yola和FRBNet为根基的低光检测思路
-routeName: 科研笔记/research-ideas
 ---
 
 ## YOLA

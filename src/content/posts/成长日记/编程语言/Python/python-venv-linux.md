@@ -10,7 +10,6 @@ category:
   - 编程语言
   - Python
 description: Linux 下使用 conda 或 venv 创建并激活虚拟环境运行 Python
-routeName: 成长日记/开发工具/python/python-venv-linux
 ---
 
 在 Linux 上 **激活虚拟环境并运行 Python**，你可以按以下步骤操作：

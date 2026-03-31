@@ -10,7 +10,6 @@ category:
   - 编程语言
   - C++
 description: std::bind vs Lambda
-routeName: 成长日记/cpp/bind与lambda/bind与lambda
 ---
 
 

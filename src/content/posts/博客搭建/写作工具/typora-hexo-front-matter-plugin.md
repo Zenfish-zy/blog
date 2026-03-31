@@ -10,7 +10,6 @@ category:
   - 博客搭建
   - 写作工具
 description: 这是一个为 Typora 编辑器开发的插件，用于快速插入 Hexo 博客所需的 YAML Front Matter 模板。
-routeName: 博客搭建/typora-hexo-front-matter-plugin
 ---
 
 # Typora Hexo Front Matter 插件使用说明
