@@ -7,7 +7,6 @@ category: Git
 description: Git 核心命令与分支管理
 ---
 
-
 # 📚 Git 核心命令与分支管理学习笔记
 
 ## 一、 指针移动的核心：`checkout` 与 `reset`
@@ -77,14 +76,14 @@ Git 的许多操作本质上都是在“移动指针”。理解这两个命令�
 - **示例图解**：
 
   ```Plaintext
-# 变基后：bugfix 跟着新节点走了，main 还在原地！
+  # 变基后：bugfix 跟着新节点走了，main 还在原地！
                     D'---E' (bugfix) 
                    /
         A---B---C (main) 
              \
               D---E (旧节点变成没有标签指向的孤儿，会被回收)
   ```
-  
+
   *(注：变基后，通常需要切换回 main 分支执行 `git merge bugfix` 进行快进合并，让 main 也指向 E')*
 
 - **⚠️ 铁律**：**绝对不要在已经推送到远程、有其他人正在使用的公共分支上使用 `git rebase`。**
