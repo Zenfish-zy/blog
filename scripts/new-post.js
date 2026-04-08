@@ -3,6 +3,15 @@
 import fs from "fs"
 import path from "path"
 
+function normalizeCategoryPath(value) {
+  return value
+    .replace(/\\/g, "/")
+    .split("/")
+    .map((segment) => segment.trim())
+    .filter(Boolean)
+    .join("/")
+}
+
 function getDate() {
   const today = new Date()
   const year = today.getFullYear()
@@ -16,7 +25,7 @@ const args = process.argv.slice(2)
 
 if (args.length === 0) {
   console.error(`Error: No filename argument provided
-Usage: npm run new-post -- <filename>`)
+Usage: npm run new-post -- <filename> [category]`)
   process.exit(1) // Terminate the script and return error code 1
 }
 
@@ -30,6 +39,8 @@ if (!fileExtensionRegex.test(fileName)) {
 
 const targetDir = "./src/content/posts/"
 const fullPath = path.join(targetDir, fileName)
+const inferredCategory = normalizeCategoryPath(path.dirname(fileName))
+const category = normalizeCategoryPath(args[1] ?? inferredCategory)
 
 if (fs.existsSync(fullPath)) {
   console.error(`Error: File ${fullPath} already exists `)
@@ -48,7 +59,7 @@ published: ${getDate()}
 description: ''
 image: ''
 tags: []
-category: []
+category: ${category}
 draft: false 
 lang: ''
 ---

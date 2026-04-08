@@ -42,7 +42,7 @@ collections:
             - # 标签
                 {label: "Tags", name: "tags", widget: "list", default: [], required: false}
             - # 分类
-                {label: "Category", name: "category", widget: "list", default: [], required: false}
+                {label: "Category", name: "category", widget: "string", required: false, hint: "使用 / 分隔层级分类，例如 机器学习/深度学习/MMDetection"}
             - # 草稿
                 {label: "Draft", name: "draft", widget: "boolean", default: false}
             - # 正文
